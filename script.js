@@ -451,6 +451,7 @@ function initGitHubStats() {
     const starsElement = document.getElementById('github-stars');
     const downloadsElement = document.getElementById('github-downloads');
     const contributorsElement = document.getElementById('github-contributors');
+    const versionElement = document.getElementById('latest-version');
 
     // Helper function to format stars (with 1 decimal place)
     function formatStars(num) {
@@ -548,12 +549,26 @@ function initGitHubStats() {
         }
     }
 
+    // Fetch latest release version
+    async function fetchLatestVersion() {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`);
+            if (!response.ok) throw new Error('Failed to fetch latest release');
+            const data = await response.json();
+            return data.tag_name;
+        } catch (error) {
+            console.error('Error fetching latest version:', error);
+            return null;
+        }
+    }
+
     // Update UI with fetched stats
     async function updateStats() {
-        const [stars, downloads, contributors] = await Promise.all([
+        const [stars, downloads, contributors, latestVersion] = await Promise.all([
             fetchRepoInfo(),
             fetchTotalDownloads(),
-            fetchContributorsCount()
+            fetchContributorsCount(),
+            fetchLatestVersion()
         ]);
 
         if (stars !== null && starsElement) {
@@ -566,6 +581,10 @@ function initGitHubStats() {
 
         if (contributors !== null && contributorsElement) {
             contributorsElement.textContent = contributors.toString();
+        }
+
+        if (latestVersion !== null && versionElement) {
+            versionElement.textContent = latestVersion;
         }
     }
 
