@@ -166,27 +166,76 @@ function initQuickTiles() {
     const SLOTS = 6;
     const tiles = [{ ...TILE_PRESETS[0], active: true }];
     let nextPreset = 1;
-    const history = [];
+    const minute = 60 * 1000;
+    const now = Date.now();
+    const caffeine = TILE_PRESETS[0];
+    const history = [
+        { name: caffeine.name, icon: caffeine.icon, cmd: caffeine.on, ok: true, at: now - 12 * minute },
+        { name: caffeine.name, icon: caffeine.icon, cmd: caffeine.off, ok: true, at: now - 2 * 60 * minute },
+        { name: caffeine.name, icon: caffeine.icon, cmd: caffeine.on, ok: true, at: now - 5 * 60 * minute },
+        { name: caffeine.name, icon: caffeine.icon, cmd: caffeine.off, ok: false, error: 'Shizuku is not running', at: now - 26 * 60 * minute },
+        { name: caffeine.name, icon: caffeine.icon, cmd: caffeine.on, ok: true, at: now - 3 * 24 * 60 * minute }
+    ];
 
-    const time = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const relativeTime = at => {
+        const minutes = Math.floor((Date.now() - at) / minute);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        if (minutes < 1) return 'Just now';
+        if (minutes < 60) return `${minutes} mins ago`;
+        if (hours < 24) return `${hours} hours ago`;
+        if (days < 7) return `${days} days ago`;
+        return 'Long ago';
+    };
 
-    const renderLogs = () => {
+    const el = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+    };
+
+    const renderLogs = animateFirst => {
         logs.replaceChildren();
-        if (!history.length) {
-            const li = document.createElement('li');
-            li.className = 'empty';
-            li.textContent = 'No executions yet. Tap a tile to run its command.';
-            logs.appendChild(li);
-            return;
-        }
-        history.slice().reverse().forEach(entry => {
-            const li = document.createElement('li');
-            li.innerHTML = '<span class="ms" aria-hidden="true">check_circle</span><div><b></b><code></code></div><time></time>';
-            li.querySelector('b').textContent = `${entry.name} turned ${entry.state}`;
-            li.querySelector('code').textContent = entry.cmd;
-            li.querySelector('time').textContent = entry.at;
-            logs.appendChild(li);
+        const total = history.length;
+        const success = history.filter(h => h.ok).length;
+        const rate = total ? `${((success / total) * 100).toFixed(1)}%` : '0.0%';
+
+        const stats = el('div', 'qs-stats');
+        const totalCard = el('div', 'qs-stat');
+        totalCard.append(el('span', '', 'Total executions'), el('b', '', String(total)));
+        const icon = el('i', 'ms ms--fill', 'analytics');
+        icon.setAttribute('aria-hidden', 'true');
+        totalCard.append(icon);
+        const rateCard = el('div', 'qs-stat qs-stat--primary');
+        rateCard.append(el('span', '', 'Success rate'), el('b', '', rate));
+        stats.append(totalCard, rateCard);
+
+        const recent = el('div', 'qs-recent');
+        const filter = el('span', 'qs-filter');
+        const filterIcon = el('i', 'ms', 'filter_alt');
+        filterIcon.setAttribute('aria-hidden', 'true');
+        filter.append(filterIcon, 'Filter');
+        recent.append(el('b', '', 'Recent activity'), filter);
+
+        const list = el('ol', 'qs-log-list');
+        list.setAttribute('aria-live', 'polite');
+        history.forEach((entry, index) => {
+            const item = el('li', 'qs-log' + (entry.ok ? '' : ' is-failed') + (animateFirst && index === 0 ? ' is-new' : ''));
+            const head = el('div', 'qs-log__head');
+            const badgeIcon = el('span', 'qs-log__icon ms', entry.icon);
+            badgeIcon.setAttribute('aria-hidden', 'true');
+            const meta = el('div');
+            meta.append(el('b', '', entry.name), el('small', '', `Shizuku \u2022 ${relativeTime(entry.at)}`));
+            head.append(badgeIcon, meta, el('span', 'qs-log__badge', entry.ok ? 'Success' : 'Failed'));
+            const cmd = el('div', 'qs-log__cmd');
+            cmd.append(el('code', '', entry.cmd));
+            item.append(head, cmd);
+            if (!entry.ok && entry.error) item.append(el('p', 'qs-log__err', `Error: ${entry.error}`));
+            list.append(item);
         });
+
+        logs.append(stats, recent, list);
     };
 
     const render = newIndex => {
@@ -206,11 +255,11 @@ function initQuickTiles() {
                 button.querySelector('small').textContent = tile.active ? 'On' : 'Off';
                 button.addEventListener('click', () => {
                     tile.active = !tile.active;
-                    history.push({ name: tile.name, state: tile.active ? 'on' : 'off', cmd: tile.active ? tile.on : tile.off, at: time() });
-                    if (history.length > 20) history.shift();
+                    history.unshift({ name: tile.name, icon: tile.icon, cmd: tile.active ? tile.on : tile.off, ok: true, at: Date.now() });
+                    if (history.length > 20) history.pop();
                     button.setAttribute('aria-pressed', String(tile.active));
                     button.querySelector('small').textContent = tile.active ? 'On' : 'Off';
-                    renderLogs();
+                    renderLogs(true);
                 });
             } else {
                 button.className = 'qs__slot';
@@ -240,7 +289,7 @@ function initQuickTiles() {
         });
         grid.hidden = view !== 'tiles';
         logs.hidden = view !== 'logs';
-        if (view === 'logs') renderLogs();
+        if (view === 'logs') renderLogs(false);
     };
     buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
     seg.addEventListener('keydown', e => {

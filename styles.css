@@ -1206,61 +1206,178 @@ main > .tour {
 .qs__logs {
   display: grid;
   align-content: start;
-  gap: var(--space-2xs);
-  max-height: 22rem;
+  gap: var(--space-sm);
+  max-height: 26rem;
   overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: var(--space-3xs);
 }
 
 .qs__logs[hidden] {
   display: none;
 }
 
-.qs__logs li {
+.qs-stats {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--shape-md);
-  background: var(--surface-bright);
-  animation: slide-in var(--dur-4) var(--spring);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-xs);
 }
 
-.qs__logs .ms {
-  font-size: 1.25rem;
+.qs-stat {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  min-height: 6.875rem;
+  padding: var(--space-sm);
+  border-radius: var(--shape-xl);
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+  overflow: hidden;
+}
+
+.qs-stat span {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.qs-stat b {
+  font-size: clamp(2rem, 2vw + 1.2rem, 2.75rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.qs-stat .ms {
+  position: absolute;
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  font-size: 4rem;
+  opacity: 0.15;
+}
+
+.qs-stat--primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.qs-recent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-2xs) var(--space-3xs) 0;
+}
+
+.qs-recent b {
+  font-size: var(--text-title);
+  font-weight: 700;
+}
+
+.qs-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-3xs) var(--space-xs);
+  font-size: 0.875rem;
+  font-weight: 500;
   color: var(--primary);
 }
 
-.qs__logs b {
-  display: block;
-  font-weight: 600;
+.qs-filter .ms {
+  font-size: 1.125rem;
 }
 
-.qs__logs code {
-  display: block;
-  margin-top: var(--space-3xs);
-  font-size: 0.8125rem;
-  background: transparent;
-  padding: 0;
+.qs-log-list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.qs-log {
+  --badge: var(--primary);
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--shape-xl);
+  background: var(--surface-container);
+}
+
+.qs-log.is-new {
+  animation: slide-in var(--dur-4) var(--spring);
+}
+
+.qs-log.is-failed {
+  --badge: var(--error);
+  background: color-mix(in oklch, var(--surface-container) 40%, var(--error-container));
+}
+
+.qs-log__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.qs-log__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--badge) 15%, transparent);
+  color: var(--badge);
+  font-size: 1.25rem;
+}
+
+.qs-log__head div {
+  display: grid;
+  min-width: 0;
+}
+
+.qs-log__head b {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.qs-log__head small {
+  font-size: 0.75rem;
   color: var(--on-surface-variant);
+}
+
+.qs-log__badge {
+  padding: var(--space-3xs) 0.625rem;
+  border-radius: var(--shape-full);
+  background: color-mix(in oklch, var(--badge) 15%, transparent);
+  color: var(--badge);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.qs-log__cmd {
+  padding-left: 4px;
+  border-radius: var(--shape-md);
+  background: color-mix(in oklch, var(--badge) 15%, transparent);
+  overflow: hidden;
+}
+
+.qs-log__cmd code {
+  display: block;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--shape-md);
+  background: var(--surface-bright);
+  font-size: 0.8125rem;
+  color: var(--on-surface);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.qs__logs time {
+.qs-log__err {
+  padding: 0 0.9rem;
   font-size: 0.8125rem;
-  color: var(--on-surface-variant);
-  font-variant-numeric: tabular-nums;
-}
-
-.qs__logs .empty {
-  display: block;
-  background: transparent;
-  text-align: center;
-  color: var(--on-surface-variant);
-  padding: var(--space-xl) var(--space-sm);
-  animation: none;
+  color: var(--error);
 }
 
 .qs__seg {
