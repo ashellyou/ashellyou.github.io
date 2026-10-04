@@ -1,671 +1,414 @@
-/* ========================================
-   aShell You - Website JavaScript
-   ======================================== */
+const REPO = 'DP-Hridayan/aShellYou';
+const API = `https://api.github.com/repos/${REPO}`;
+const CACHE_KEY = 'ashell-stats-v2';
+const CACHE_TTL = 60 * 60 * 1000;
+
+const SEEDS = [
+    ['#B5353F', 21], ['#F06435', 38], ['#E07200', 54], ['#C78100', 71], ['#B28B00', 89],
+    ['#999419', 107], ['#7D9B36', 124], ['#5BA053', 142], ['#30A370', 160], ['#00A38C', 178],
+    ['#00A1A3', 196], ['#169EB7', 215], ['#389AC7', 232], ['#5695D2', 249], ['#728FD8', 267],
+    ['#8C88D8', 285], ['#A282D1', 302], ['#B67CC2', 321], ['#C677AD', 340], ['#B23268', 359]
+];
+const DEFAULT_HUE = 124;
+
+const TILE_PRESETS = [
+    { name: 'Caffeine', icon: 'coffee', on: 'svc power stayon true', off: 'svc power stayon false' },
+    { name: 'Fast animations', icon: 'animation', on: 'settings put global animator_duration_scale 0.5', off: 'settings put global animator_duration_scale 1' },
+    { name: 'Dark mode', icon: 'dark_mode', on: 'cmd uimode night yes', off: 'cmd uimode night no' },
+    { name: 'ADB over Wi-Fi', icon: 'wifi_tethering', on: 'settings put global adb_wifi_enabled 1', off: 'settings put global adb_wifi_enabled 0' },
+    { name: 'Show taps', icon: 'touch_app', on: 'settings put system show_touches 1', off: 'settings put system show_touches 0' },
+    { name: 'Layout bounds', icon: 'border_outer', on: 'setprop debug.layout true', off: 'setprop debug.layout false' }
+];
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
-    initNavigation();
-    initTypingAnimation();
-    initScrollAnimations();
-    initCarousel();
-    initSmoothScroll();
-    initGitHubStats();
+    initAppbar();
+    initReveal();
+    initParallax();
+    initSegmented();
+    initQuickTiles();
+    initSeeds();
+    loadStats();
 });
 
-/* ========================================
-   Navigation
-   ======================================== */
-function initNavigation() {
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    // Navbar scroll effect
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    // Mobile menu toggle
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // Close menu on link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // Close menu on outside click
-    document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target) && navMenu.classList.contains('active')) {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
+function squish(el) {
+    if (!el || reduceMotion.matches) return;
+    el.classList.add('is-moving');
+    clearTimeout(el.squishTimer);
+    el.squishTimer = setTimeout(() => el.classList.remove('is-moving'), 260);
 }
 
-/* ========================================
-   Typing Animation
-   ======================================== */
-function initTypingAnimation() {
-    const typingElement = document.querySelector('.typing-text');
-    const phrases = [
-        'Execute ADB Commands on Your Device',
-        'No PC Required',
-        'Material You Design',
-        'Powered by Shizuku',
-        'Control Devices via OTG',
-        'Wireless Debugging Support'
-    ];
+function initAppbar() {
+    const bar = document.getElementById('appbar');
+    if (!bar) return;
+    const update = () => bar.classList.toggle('is-scrolled', window.scrollY > 8);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+}
 
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let isPaused = false;
-
-    function type() {
-        const currentPhrase = phrases[phraseIndex];
-
-        if (isPaused) {
-            setTimeout(type, 100);
-            return;
-        }
-
-        if (isDeleting) {
-            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-        }
-
-        let typeSpeed = isDeleting ? 30 : 50;
-
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            isPaused = true;
-            setTimeout(() => {
-                isPaused = false;
-                isDeleting = true;
-            }, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
-
-        setTimeout(type, typeSpeed);
+function initReveal() {
+    const items = document.querySelectorAll('[data-reveal]');
+    if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-in'));
+        return;
     }
-
-    // Start typing animation
-    setTimeout(type, 1000);
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            entry.target.querySelectorAll('[data-count]').forEach(countUp);
+            if (entry.target.matches('[data-count]')) countUp(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(el => observer.observe(el));
 }
 
-/* ========================================
-   Scroll Animations
-   ======================================== */
-function initScrollAnimations() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+function countUp(el) {
+    const target = Number(el.dataset.to);
+    if (!Number.isFinite(target) || el.dataset.done) return;
+    el.dataset.done = '1';
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion.matches) {
+        el.textContent = formatCount(target) + suffix;
+        return;
+    }
+    const start = performance.now();
+    const duration = 1400;
+    const tick = now => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 4);
+        el.textContent = formatCount(Math.round(target * eased)) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+}
+
+function formatCount(n) {
+    if (n >= 1e6) return `${(n / 1e6).toFixed(1).replace(/\.0$/, '')}M`;
+    if (n >= 1e4) return `${Math.round(n / 1e3)}k`;
+    return n.toLocaleString('en-US');
+}
+
+function initParallax() {
+    const items = [...document.querySelectorAll('[data-parallax]')];
+    if (!items.length || reduceMotion.matches) return;
+    let ticking = false;
+    const update = () => {
+        const y = window.scrollY;
+        items.forEach(el => {
+            el.style.setProperty('--py', `${(y * Number(el.dataset.parallax)).toFixed(1)}px`);
+        });
+        ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+        }
+    }, { passive: true });
+}
+
+function initSegmented() {
+    const list = document.querySelector('.segmented');
+    if (!list) return;
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    const thumb = list.querySelector('.segmented__thumb');
+
+    const moveThumb = (tab, animate) => {
+        if (animate) squish(thumb);
+        thumb.style.setProperty('--tx', `${tab.offsetLeft}px`);
+        thumb.style.setProperty('--tw', `${tab.offsetWidth}px`);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    const select = (tab, focus) => {
+        tabs.forEach(t => {
+            const active = t === tab;
+            t.setAttribute('aria-selected', String(active));
+            t.tabIndex = active ? 0 : -1;
+            const panel = document.getElementById(t.getAttribute('aria-controls'));
+            panel.hidden = !active;
+            panel.classList.toggle('is-active', active);
         });
-    }, observerOptions);
+        moveThumb(tab, true);
+        if (focus) tab.focus();
+    };
 
-    // Observe feature cards
-    document.querySelectorAll('.feature-card').forEach(card => {
-        observer.observe(card);
+    tabs.forEach(tab => tab.addEventListener('click', () => select(tab, false)));
+    list.addEventListener('keydown', e => {
+        const index = tabs.indexOf(document.activeElement);
+        if (index < 0) return;
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (step) {
+            e.preventDefault();
+            select(tabs[(index + step + tabs.length) % tabs.length], true);
+        } else if (e.key === 'Home' || e.key === 'End') {
+            e.preventDefault();
+            select(tabs[e.key === 'Home' ? 0 : tabs.length - 1], true);
+        }
     });
 
-    // Observe other animated elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Observe sections for header animations
-    document.querySelectorAll('.section-header').forEach(header => {
-        header.classList.add('fade-in');
-        observer.observe(header);
-    });
-
-    // Observe requirement cards
-    document.querySelectorAll('.requirement-card').forEach((card, index) => {
-        card.classList.add('fade-in');
-        card.style.transitionDelay = `${index * 100}ms`;
-        observer.observe(card);
-    });
-
-    // Observe download cards
-    document.querySelectorAll('.download-card').forEach((card, index) => {
-        card.classList.add('fade-in');
-        card.style.transitionDelay = `${index * 100}ms`;
-        observer.observe(card);
-    });
-
-    // Observe community cards
-    document.querySelectorAll('.community-card').forEach((card, index) => {
-        card.classList.add('fade-in');
-        card.style.transitionDelay = `${index * 100}ms`;
-        observer.observe(card);
-    });
+    const current = () => tabs.find(t => t.getAttribute('aria-selected') === 'true');
+    moveThumb(current());
+    window.addEventListener('resize', () => moveThumb(current()));
+    document.fonts?.ready.then(() => moveThumb(current()));
 }
 
-/* ========================================
-   Screenshot Carousel
-   ======================================== */
-function initCarousel() {
-    const trackContainer = document.querySelector('.carousel-track-container');
-    const track = document.getElementById('carousel-track');
-    const slides = track.querySelectorAll('.carousel-slide');
-    const prevBtn = document.getElementById('carousel-prev');
-    const nextBtn = document.getElementById('carousel-next');
-    const dotsContainer = document.getElementById('carousel-dots');
+function initQuickTiles() {
+    const grid = document.getElementById('qs-grid');
+    const logs = document.getElementById('qs-logs');
+    const seg = document.querySelector('.qs__seg');
+    if (!grid || !logs || !seg) return;
 
-    let currentPage = 0;
-    let slidesPerPage = 1;
-    let totalPages = 1;
-    let autoplayInterval;
-    let isHovered = false;
+    const SLOTS = 6;
+    const tiles = [{ ...TILE_PRESETS[0], active: true }];
+    let nextPreset = 1;
+    const history = [];
 
-    // Calculate how many slides can fit without cropping
-    function calculateSlidesPerPage() {
-        if (slides.length === 0) return 1;
+    const time = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-        // Get actual container width using getBoundingClientRect for accuracy
-        const containerRect = trackContainer.getBoundingClientRect();
-        const containerWidth = containerRect.width;
-
-        const slide = slides[0];
-        const phoneFrame = slide.querySelector('.phone-frame');
-
-        // Get the actual rendered width of the phone frame
-        let slideWidth;
-        if (phoneFrame) {
-            const frameRect = phoneFrame.getBoundingClientRect();
-            slideWidth = frameRect.width;
-        } else {
-            slideWidth = slide.getBoundingClientRect().width;
-        }
-
-        // Gap between slides - matches CSS var(--space-lg) = 24px, but on mobile it's 16px
-        const computedStyle = window.getComputedStyle(track);
-        const gap = parseFloat(computedStyle.gap) || 24;
-
-        if (slideWidth === 0) return 1; // Safety check
-
-        // Calculate how many FULL slides can fit
-        // Formula: n slides need (n * slideWidth) + ((n - 1) * gap) <= containerWidth
-        // Solving for n: n <= (containerWidth + gap) / (slideWidth + gap)
-        const maxSlides = Math.floor((containerWidth + gap) / (slideWidth + gap));
-
-        return Math.max(1, Math.min(maxSlides, slides.length));
-    }
-
-    // Create dots based on total pages
-    function createDots() {
-        dotsContainer.innerHTML = '';
-
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement('button');
-            dot.classList.add('carousel-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.setAttribute('aria-label', `Go to page ${i + 1}`);
-            dot.addEventListener('click', () => goToPage(i));
-            dotsContainer.appendChild(dot);
-        }
-    }
-
-    // Get the actual slide width (just the phone frame, no gap)
-    function getSlideWidth() {
-        if (slides.length === 0) return 0;
-        const slide = slides[0];
-        const phoneFrame = slide.querySelector('.phone-frame');
-        if (phoneFrame) {
-            return phoneFrame.getBoundingClientRect().width;
-        }
-        return slide.getBoundingClientRect().width;
-    }
-
-    // Get the gap between slides
-    function getGap() {
-        const computedStyle = window.getComputedStyle(track);
-        return parseFloat(computedStyle.gap) || 24;
-    }
-
-    // Update carousel position and dots
-    function updateCarousel() {
-        const slideWidth = getSlideWidth();
-        const gap = getGap();
-
-        // Each page shows slidesPerPage slides
-        // The offset for page n is: n * slidesPerPage * (slideWidth + gap)
-        const offset = currentPage * slidesPerPage * (slideWidth + gap);
-
-        track.style.transform = `translateX(-${offset}px)`;
-
-        // Update dots
-        const dots = dotsContainer.querySelectorAll('.carousel-dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentPage);
-        });
-
-        // Update button states (optional visual feedback)
-        prevBtn.style.opacity = currentPage === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentPage === totalPages - 1 ? '0.5' : '1';
-    }
-
-    // Navigate to next page
-    function nextPage() {
-        currentPage = currentPage >= totalPages - 1 ? 0 : currentPage + 1;
-        updateCarousel();
-    }
-
-    // Navigate to previous page
-    function prevPage() {
-        currentPage = currentPage <= 0 ? totalPages - 1 : currentPage - 1;
-        updateCarousel();
-    }
-
-    // Go to specific page
-    function goToPage(pageIndex) {
-        currentPage = Math.max(0, Math.min(pageIndex, totalPages - 1));
-        updateCarousel();
-    }
-
-    // Recalculate layout
-    function recalculateLayout() {
-        // First, reset any explicit width so we can measure the natural container size
-        trackContainer.style.maxWidth = '';
-
-        slidesPerPage = calculateSlidesPerPage();
-        totalPages = Math.ceil(slides.length / slidesPerPage);
-
-        // Now set an explicit max-width on the container to fit exactly slidesPerPage slides
-        const slideWidth = getSlideWidth();
-        const gap = getGap();
-
-        // The width needed for slidesPerPage slides: (slidesPerPage * slideWidth) + ((slidesPerPage - 1) * gap)
-        const exactWidth = (slidesPerPage * slideWidth) + ((slidesPerPage - 1) * gap);
-        trackContainer.style.maxWidth = `${exactWidth}px`;
-
-        // Make sure current page is valid
-        if (currentPage >= totalPages) {
-            currentPage = totalPages - 1;
-        }
-        if (currentPage < 0) {
-            currentPage = 0;
-        }
-
-        createDots();
-        updateCarousel();
-
-        console.log('Carousel recalculated:', { slidesPerPage, totalPages, slideWidth, gap, exactWidth });
-    }
-
-    // Autoplay functions
-    function startAutoplay() {
-        stopAutoplay();
-        autoplayInterval = setInterval(() => {
-            if (!isHovered) {
-                nextPage();
-            }
-        }, 4000);
-    }
-
-    function stopAutoplay() {
-        if (autoplayInterval) {
-            clearInterval(autoplayInterval);
-        }
-    }
-
-    // Event listeners
-    prevBtn.addEventListener('click', () => {
-        prevPage();
-        startAutoplay();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        nextPage();
-        startAutoplay();
-    });
-
-    track.addEventListener('mouseenter', () => {
-        isHovered = true;
-    });
-
-    track.addEventListener('mouseleave', () => {
-        isHovered = false;
-    });
-
-    // Handle resize with debounce
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            recalculateLayout();
-        }, 150);
-    });
-
-    // Touch support for swipe
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    track.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    track.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                nextPage();
-            } else {
-                prevPage();
-            }
-            startAutoplay();
-        }
-    }
-
-    // Initialize after images load to get correct dimensions
-    function initAfterImagesLoad() {
-        const images = track.querySelectorAll('img');
-        let loadedCount = 0;
-        const totalImages = images.length;
-
-        if (totalImages === 0) {
-            recalculateLayout();
-            startAutoplay();
+    const renderLogs = () => {
+        logs.replaceChildren();
+        if (!history.length) {
+            const li = document.createElement('li');
+            li.className = 'empty';
+            li.textContent = 'No executions yet. Tap a tile to run its command.';
+            logs.appendChild(li);
             return;
         }
+        history.slice().reverse().forEach(entry => {
+            const li = document.createElement('li');
+            li.innerHTML = '<span class="ms" aria-hidden="true">check_circle</span><div><b></b><code></code></div><time></time>';
+            li.querySelector('b').textContent = `${entry.name} turned ${entry.state}`;
+            li.querySelector('code').textContent = entry.cmd;
+            li.querySelector('time').textContent = entry.at;
+            logs.appendChild(li);
+        });
+    };
 
-        images.forEach(img => {
-            if (img.complete) {
-                loadedCount++;
-                if (loadedCount === totalImages) {
-                    recalculateLayout();
-                    startAutoplay();
-                }
+    const render = newIndex => {
+        grid.replaceChildren();
+        for (let i = 0; i < SLOTS; i++) {
+            const tile = tiles[i];
+            const item = document.createElement('div');
+            item.setAttribute('role', 'listitem');
+            const button = document.createElement('button');
+            button.type = 'button';
+            if (tile) {
+                button.className = 'qs__tile' + (i === newIndex ? ' is-new' : '');
+                button.setAttribute('aria-pressed', String(tile.active));
+                button.innerHTML = '<span class="ms" aria-hidden="true"></span><span><b></b><small></small></span>';
+                button.querySelector('.ms').textContent = tile.icon;
+                button.querySelector('b').textContent = tile.name;
+                button.querySelector('small').textContent = tile.active ? 'On' : 'Off';
+                button.addEventListener('click', () => {
+                    tile.active = !tile.active;
+                    history.push({ name: tile.name, state: tile.active ? 'on' : 'off', cmd: tile.active ? tile.on : tile.off, at: time() });
+                    if (history.length > 20) history.shift();
+                    button.setAttribute('aria-pressed', String(tile.active));
+                    button.querySelector('small').textContent = tile.active ? 'On' : 'Off';
+                    renderLogs();
+                });
             } else {
-                img.addEventListener('load', () => {
-                    loadedCount++;
-                    if (loadedCount === totalImages) {
-                        recalculateLayout();
-                        startAutoplay();
-                    }
-                });
-                img.addEventListener('error', () => {
-                    loadedCount++;
-                    if (loadedCount === totalImages) {
-                        recalculateLayout();
-                        startAutoplay();
-                    }
+                button.className = 'qs__slot';
+                button.innerHTML = `<span class="ms" aria-hidden="true">add</span><span>Tile ${i + 1}</span>`;
+                button.setAttribute('aria-label', `Add tile ${i + 1}`);
+                button.addEventListener('click', () => {
+                    const preset = TILE_PRESETS[nextPreset % TILE_PRESETS.length];
+                    nextPreset++;
+                    tiles.push({ ...preset, active: false });
+                    render(tiles.length - 1);
+                    grid.querySelectorAll('button')[tiles.length - 1]?.focus();
                 });
             }
+            item.appendChild(button);
+            grid.appendChild(item);
+        }
+    };
+
+    const buttons = [...seg.querySelectorAll('button')];
+    const show = view => {
+        if (seg.dataset.view && seg.dataset.view !== view) squish(seg.querySelector('.qs__thumb'));
+        seg.dataset.view = view;
+        buttons.forEach(b => {
+            const active = b.dataset.view === view;
+            b.setAttribute('aria-selected', String(active));
+            b.tabIndex = active ? 0 : -1;
         });
+        grid.hidden = view !== 'tiles';
+        logs.hidden = view !== 'logs';
+        if (view === 'logs') renderLogs();
+    };
+    buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
+    seg.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        const next = seg.dataset.view === 'tiles' ? 'logs' : 'tiles';
+        show(next);
+        buttons.find(b => b.dataset.view === next).focus();
+    });
 
-        // Fallback: initialize anyway after a timeout
-        setTimeout(() => {
-            if (totalPages === 1) {
-                recalculateLayout();
-                startAutoplay();
-            }
-        }, 2000);
-    }
-
-    initAfterImagesLoad();
+    render(-1);
+    show('tiles');
 }
 
-/* ========================================
-   GitHub Stats
-   ======================================== */
-function initGitHubStats() {
-    const REPO_OWNER = 'DP-Hridayan';
-    const REPO_NAME = 'aShellYou';
+function initSeeds() {
+    const group = document.getElementById('seeds');
+    if (!group) return;
+    const root = document.documentElement;
 
-    const starsElement = document.getElementById('github-stars');
-    const downloadsElement = document.getElementById('github-downloads');
-    const contributorsElement = document.getElementById('github-contributors');
-    const versionElement = document.getElementById('latest-version');
+    SEEDS.forEach(([hex, hue], index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'seed';
+        button.setAttribute('role', 'radio');
+        button.setAttribute('aria-label', `Seed colour ${index + 1}`);
+        const checked = hue === DEFAULT_HUE;
+        button.setAttribute('aria-checked', String(checked));
+        button.tabIndex = checked ? 0 : -1;
+        button.style.setProperty('--sw', hex);
+        button.style.backgroundColor = hex;
+        button.dataset.hue = String(hue);
+        group.appendChild(button);
+    });
 
-    // Helper function to format stars (with 1 decimal place)
-    function formatStars(num) {
-        if (num >= 1000000) {
-            return (num / 1000000).toFixed(1) + 'M';
-        } else if (num >= 1000) {
-            return (num / 1000).toFixed(1) + 'K';
+    const buttons = [...group.querySelectorAll('.seed')];
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    const select = (button, focus) => {
+        buttons.forEach(b => {
+            b.setAttribute('aria-checked', 'false');
+            b.tabIndex = -1;
+        });
+        button.setAttribute('aria-checked', 'true');
+        button.tabIndex = 0;
+        if (focus) button.focus();
+        const hue = Number(button.dataset.hue);
+        if (!reduceMotion.matches) {
+            root.classList.add('is-retheming');
+            clearTimeout(root.rethemeTimer);
+            root.rethemeTimer = setTimeout(() => root.classList.remove('is-retheming'), 760);
         }
-        return num.toString();
-    }
-
-    // Helper function to format downloads (whole numbers)
-    function formatDownloads(num) {
-        if (num >= 1000000) {
-            return Math.round(num / 1000000) + 'M+';
-        } else if (num >= 1000) {
-            return Math.round(num / 1000) + 'K+';
+        if (hue === DEFAULT_HUE) {
+            root.style.removeProperty('--hue');
+        } else {
+            root.style.setProperty('--hue', String(hue));
         }
-        return num.toString();
-    }
-
-    // Fetch repository info (stars)
-    async function fetchRepoInfo() {
-        try {
-            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
-            if (!response.ok) throw new Error('Failed to fetch repo info');
-            const data = await response.json();
-            return data.stargazers_count;
-        } catch (error) {
-            console.error('Error fetching repo info:', error);
-            return null;
+        if (metaTheme) {
+            requestAnimationFrame(() => {
+                metaTheme.content = getComputedStyle(document.body).backgroundColor;
+            });
         }
-    }
+    };
 
-    // Fetch all releases and calculate total downloads
-    async function fetchTotalDownloads() {
-        try {
-            let totalDownloads = 0;
-            let page = 1;
-            let hasMore = true;
+    group.addEventListener('click', e => {
+        const button = e.target.closest('.seed');
+        if (button) select(button, false);
+    });
 
-            while (hasMore) {
-                const response = await fetch(
-                    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases?per_page=100&page=${page}`
-                );
-                if (!response.ok) throw new Error('Failed to fetch releases');
-                const releases = await response.json();
-
-                if (releases.length === 0) {
-                    hasMore = false;
-                } else {
-                    releases.forEach(release => {
-                        release.assets.forEach(asset => {
-                            totalDownloads += asset.download_count;
-                        });
-                    });
-                    page++;
-                    // If we got less than 100 results, we've reached the end
-                    if (releases.length < 100) {
-                        hasMore = false;
-                    }
-                }
-            }
-
-            return totalDownloads;
-        } catch (error) {
-            console.error('Error fetching downloads:', error);
-            return null;
-        }
-    }
-
-    // Fetch contributors count
-    async function fetchContributorsCount() {
-        try {
-            const response = await fetch(
-                `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contributors?per_page=1`
-            );
-            if (!response.ok) throw new Error('Failed to fetch contributors');
-
-            // Get total count from Link header
-            const linkHeader = response.headers.get('Link');
-            if (linkHeader) {
-                const match = linkHeader.match(/page=(\d+)>; rel="last"/);
-                if (match) {
-                    return parseInt(match[1], 10);
-                }
-            }
-
-            // If no pagination, count from response
-            const contributors = await response.json();
-            return contributors.length;
-        } catch (error) {
-            console.error('Error fetching contributors:', error);
-            return null;
-        }
-    }
-
-    // Fetch latest release version
-    async function fetchLatestVersion() {
-        try {
-            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`);
-            if (!response.ok) throw new Error('Failed to fetch latest release');
-            const data = await response.json();
-            return data.tag_name;
-        } catch (error) {
-            console.error('Error fetching latest version:', error);
-            return null;
-        }
-    }
-
-    // Update UI with fetched stats
-    async function updateStats() {
-        const [stars, downloads, contributors, latestVersion] = await Promise.all([
-            fetchRepoInfo(),
-            fetchTotalDownloads(),
-            fetchContributorsCount(),
-            fetchLatestVersion()
-        ]);
-
-        if (stars !== null && starsElement) {
-            starsElement.textContent = formatStars(stars);
-        }
-
-        if (downloads !== null && downloadsElement) {
-            downloadsElement.textContent = formatDownloads(downloads);
-        }
-
-        if (contributors !== null && contributorsElement) {
-            contributorsElement.textContent = contributors.toString();
-        }
-
-        if (latestVersion !== null && versionElement) {
-            versionElement.textContent = latestVersion;
-        }
-    }
-
-    // Fetch and update stats
-    updateStats();
-}
-
-/* ========================================
-   Smooth Scroll
-   ======================================== */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    group.addEventListener('keydown', e => {
+        const index = buttons.indexOf(document.activeElement);
+        if (index < 0) return;
+        const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (step) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            select(buttons[(index + step + buttons.length) % buttons.length], true);
+        } else if (e.key === 'Home' || e.key === 'End') {
+            e.preventDefault();
+            select(buttons[e.key === 'Home' ? 0 : buttons.length - 1], true);
+        }
+    });
+}
 
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+function readCache() {
+    try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const data = JSON.parse(raw);
+        return Date.now() - data.at < CACHE_TTL ? data : null;
+    } catch {
+        return null;
+    }
+}
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+function writeCache(data) {
+    try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ ...data, at: Date.now() }));
+    } catch {
+    }
+}
+
+async function getJson(url) {
+    const res = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+    if (!res.ok) throw new Error(String(res.status));
+    return res;
+}
+
+async function sumDownloads() {
+    let total = 0;
+    for (let page = 1; page <= 10; page++) {
+        const releases = await getJson(`${API}/releases?per_page=100&page=${page}`).then(r => r.json());
+        releases.forEach(release => release.assets.forEach(asset => { total += asset.download_count; }));
+        if (releases.length < 100) break;
+    }
+    return total;
+}
+
+async function fetchStats() {
+    const results = await Promise.allSettled([
+        getJson(API).then(r => r.json()).then(d => d.stargazers_count),
+        getJson(`${API}/contributors?per_page=1&anon=1`).then(async r => {
+            const match = (r.headers.get('Link') || '').match(/page=(\d+)>; rel="last"/);
+            return match ? Number(match[1]) : (await r.json()).length;
+        }),
+        getJson(`${API}/releases/latest`).then(r => r.json()).then(d => d.tag_name),
+        sumDownloads()
+    ]);
+    const [stars, contributors, version, downloads] = results.map(r => (r.status === 'fulfilled' ? r.value : null));
+    return { stars, contributors, version, downloads };
+}
+
+function renderStats(stats) {
+    const setCount = (key, value) => {
+        document.querySelectorAll(`[data-stat="${key}"]`).forEach(el => {
+            el.dataset.to = String(value);
+            const cell = el.closest('[data-live]');
+            if (cell) cell.hidden = false;
+            if (cell?.classList.contains('is-in') || !('IntersectionObserver' in window)) countUp(el);
+        });
+    };
+    if (Number.isFinite(stats.stars)) setCount('stars', stats.stars);
+    if (Number.isFinite(stats.downloads) && stats.downloads > 0) setCount('downloads', stats.downloads);
+    if (Number.isFinite(stats.contributors)) setCount('contributors', stats.contributors);
+    if (stats.version) {
+        document.querySelectorAll('[data-stat="version"]').forEach(el => { el.textContent = stats.version; });
+    }
+}
+
+async function loadStats() {
+    try {
+        const res = await fetch('stats.json', { cache: 'no-cache' });
+        if (res.ok) {
+            const stats = await res.json();
+            if (Number.isFinite(stats.stars)) {
+                renderStats(stats);
+                return;
             }
-        });
-    });
+        }
+    } catch {
+    }
+    const cached = readCache();
+    if (cached) {
+        renderStats(cached);
+        return;
+    }
+    try {
+        const stats = await fetchStats();
+        renderStats(stats);
+        if (stats.stars !== null) writeCache(stats);
+    } catch {
+    }
 }
-
-/* ========================================
-   Parallax Effects (Optional Enhancement)
-   ======================================== */
-function initParallax() {
-    const orbs = document.querySelectorAll('.gradient-orb');
-
-    window.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX / window.innerWidth - 0.5;
-        const mouseY = e.clientY / window.innerHeight - 0.5;
-
-        orbs.forEach((orb, index) => {
-            const speed = (index + 1) * 20;
-            const x = mouseX * speed;
-            const y = mouseY * speed;
-
-            orb.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
-}
-
-/* ========================================
-   Hero Screenshot Rotation
-   ======================================== */
-function initHeroScreenshotRotation() {
-    const heroScreenshot = document.getElementById('hero-screenshot');
-    const screenshots = [
-        'https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/01.jpeg',
-        'https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/02.jpeg',
-        'https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/03.jpeg',
-        'https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/04.jpeg',
-        'https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/05.jpeg'
-    ];
-
-    let currentIndex = 0;
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % screenshots.length;
-        heroScreenshot.style.opacity = '0';
-
-        setTimeout(() => {
-            heroScreenshot.src = screenshots[currentIndex];
-            heroScreenshot.style.opacity = '1';
-        }, 300);
-    }, 4000);
-
-    // Add transition for fade effect
-    heroScreenshot.style.transition = 'opacity 0.3s ease';
-}
-
-// Initialize hero screenshot rotation after page load
-window.addEventListener('load', () => {
-    initHeroScreenshotRotation();
-    initParallax();
-});

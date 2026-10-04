@@ -1,528 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>aShell You - Execute ADB Commands on Android</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>aShell You · ADB, shell and fastboot on Android, no PC needed</title>
+    <meta name="description" content="Run ADB, shell and fastboot commands on Android with Shizuku, root, Wi-Fi or USB OTG. Mirror screens, read logcat and flash partitions. Free and open source.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="author" content="DP Hridayan">
+    <meta name="application-name" content="aShell You">
+    <meta name="theme-color" content="#fafaed">
+    <meta name="color-scheme" content="light">
+    <link rel="canonical" href="https://ashellyou.github.io/">
 
-    <!-- Meta Description -->
-    <meta name="description"
-        content="aShell You is a Material You designed Android app for executing ADB commands directly on your device using Shizuku, root, or wireless debugging.">
-
-    <!-- Keywords -->
-    <meta name="keywords"
-        content="aShell You, ADB commands, Android shell, Shizuku, wireless debugging, OTG, Material You, Android developer tools">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="aShell You - Execute ADB Commands on Android">
-    <meta property="og:description"
-        content="A Material You designed app for your ADB needs. Run shell commands directly on your Android device.">
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/assets/mockups.svg">
-    <meta property="og:url" content="https://ashellyou.github.io">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="aShell You">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://ashellyou.github.io/">
+    <meta property="og:title" content="aShell You · ADB at your fingertips">
+    <meta property="og:description" content="Shell, ADB and fastboot for Android. Mirror screens, read logcat, flash partitions and move files over Shizuku, root, Wi-Fi or USB OTG. Free and open source.">
+    <meta property="og:image" content="https://ashellyou.github.io/assets/og.png">
+    <meta property="og:image:secure_url" content="https://ashellyou.github.io/assets/og.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="aShell You: ADB at your fingertips. The app home screen beside the headline.">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="aShell You - Execute ADB Commands on Android">
-    <meta name="twitter:description" content="A Material You designed app for your ADB needs.">
-    <meta name="twitter:image"
-        content="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/assets/mockups.svg">
+    <meta name="twitter:title" content="aShell You · ADB at your fingertips">
+    <meta name="twitter:description" content="Shell, ADB and fastboot for Android. Mirror screens, read logcat, flash partitions and move files over Shizuku, root, Wi-Fi or USB OTG. Free and open source.">
+    <meta name="twitter:image" content="https://ashellyou.github.io/assets/og.png">
+    <meta name="twitter:image:alt" content="aShell You: ADB at your fingertips. The app home screen beside the headline.">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png"
-        href="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/icon.png">
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="preload" as="image" href="assets/screens/home.webp" fetchpriority="high">
 
-    <!-- Google Fonts -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ashellyou.github.io/#website",
+      "url": "https://ashellyou.github.io/",
+      "name": "aShell You",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://ashellyou.github.io/#author"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ashellyou.github.io/#author",
+      "name": "DP Hridayan",
+      "url": "https://github.com/DP-Hridayan"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ashellyou.github.io/#app",
+      "name": "aShell You",
+      "alternateName": "aShellYou",
+      "description": "Run ADB, shell and fastboot commands on Android with Shizuku, root, Wi-Fi or USB OTG. Mirror screens, read logcat and flash partitions. Free and open source.",
+      "url": "https://ashellyou.github.io/",
+      "image": "https://ashellyou.github.io/assets/og.png",
+      "screenshot": [
+        "https://ashellyou.github.io/assets/screens/home.webp",
+        "https://ashellyou.github.io/assets/screens/shell.webp",
+        "https://ashellyou.github.io/assets/screens/mirror.webp",
+        "https://ashellyou.github.io/assets/screens/logcat.webp",
+        "https://ashellyou.github.io/assets/screens/fastboot.webp"
+      ],
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Android debugging tool",
+      "operatingSystem": "Android 9.0 or later",
+      "softwareVersion": "7.4.0",
+      "downloadUrl": "https://github.com/DP-Hridayan/aShellYou/releases/latest",
+      "installUrl": "https://f-droid.org/packages/in.hridayan.ashell",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "isAccessibleForFree": true,
+      "inLanguage": [
+        "en",
+        "ar",
+        "de",
+        "es",
+        "fa",
+        "fr",
+        "hi",
+        "it",
+        "ja",
+        "pt-BR",
+        "pt-PT",
+        "ru",
+        "tr",
+        "uk",
+        "vi",
+        "zh-CN"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@id": "https://ashellyou.github.io/#author"
+      },
+      "featureList": [
+        "Run ADB and shell commands with Shizuku, root, basic shell or wireless debugging",
+        "Control other Android devices over Wi-Fi or USB OTG",
+        "Screen mirroring and control based on scrcpy",
+        "Logcat viewer with filter profiles",
+        "Fastboot flashing, wipe and reboot over USB OTG",
+        "ADB sideload of OTA packages",
+        "ADB file browser with push and pull",
+        "Quick Settings tiles that run commands",
+        "AI assistant that runs commands with approval (GitHub build)",
+        "Material You theming with 20 seed colours"
+      ],
+      "sameAs": [
+        "https://github.com/DP-Hridayan/aShellYou",
+        "https://f-droid.org/packages/in.hridayan.ashell",
+        "https://apt.izzysoft.de/fdroid/index/apk/in.hridayan.ashell",
+        "https://t.me/aShellYou",
+        "https://crowdin.com/project/ashellyou"
+      ]
+    }
+  ]
+}
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght,ROND@6..144,75..125,300..900,0..100&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&display=block" rel="stylesheet">
 
-    <!-- Styles -->
+    <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/icon.png"
-                    alt="aShell You Logo" class="logo-img">
-                <span>aShell You</span>
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
-                <li><a href="#requirements" class="nav-link">Requirements</a></li>
-                <li><a href="#download" class="nav-link">Download</a></li>
-                <li><a href="#community" class="nav-link">Community</a></li>
-            </ul>
-        </div>
-    </nav>
+    <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+        <symbol id="head" viewBox="8 1 32 47">
+            <path fill="currentColor" d="M10 21.95v-2q0-3.6 1.65-6.55Q13.3 10.45 16 8.55L12.25 4.8l1.8-1.8 4.25 4.2q1.25-0.6 2.725-0.925Q22.5 5.95 24 5.95t2.975 0.325Q28.45 6.6 29.75 7.2l4.2-4.2 1.8 1.8L32 8.55q2.7 1.9 4.35 4.85Q38 16.35 38 19.95v2zm20-4q0.85 0 1.425-0.575Q32 16.8 32 15.95q0-0.85-0.575-1.425Q30.85 13.95 30 13.95q-0.85 0-1.425 0.575Q28 15.1 28 15.95q0 0.85 0.575 1.425Q29.15 17.95 30 17.95zm-12 0q0.85 0 1.425-0.575Q20 16.8 20 15.95q0-0.85-0.575-1.425Q18.85 13.95 18 13.95q-0.85 0-1.425 0.575Q16 15.1 16 15.95q0 0.85 0.575 1.425Q17.15 17.95 18 17.95zM24 46q-5.85 0-9.925-4.075Q10 37.85 10 32v-8.05h28V32q0 5.85-4.075 9.925Q29.85 46 24 46z"/>
+        </symbol>
+        <symbol id="gh" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+        </symbol>
+        <symbol id="tg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M21.94 4.3a1.2 1.2 0 0 0-1.23-.2L2.9 11.03c-.82.32-.8 1.49.03 1.78l4.44 1.5 1.7 5.36c.2.62.98.82 1.45.37l2.47-2.38 4.6 3.4c.57.42 1.39.1 1.53-.6l3.17-15.06a1.2 1.2 0 0 0-.35-1.1ZM9.8 14.5l-.4 3.43-1.25-3.92 9.6-6.24-7.95 6.73Z"/>
+        </symbol>
+    </svg>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-bg">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="appbar" id="appbar">
+        <a class="brand" href="#top" aria-label="aShell You home">
+            <svg class="brand__head" aria-hidden="true"><use href="#head"/></svg>
+            <span class="brand__word">Shell You</span>
+        </a>
+        <nav class="appbar__nav" aria-label="Primary">
+            <a href="#home">Features</a>
+            <a href="#tour">Tour</a>
+            <a href="#download">Download</a>
+        </nav>
+        <div class="appbar__actions">
+            <a class="icon-btn" href="https://github.com/DP-Hridayan/aShellYou" target="_blank" rel="noopener" aria-label="aShell You on GitHub">
+                <svg aria-hidden="true"><use href="#gh"/></svg>
+            </a>
+            <a class="tonal-pill" href="#download">Download</a>
         </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="gradient-text">aShell You</span>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="hero__text">
+                <h1 class="hero__title" aria-label="ADB at your fingertips.">
+                    <span class="w" aria-hidden="true" style="--i:0">ADB</span>
+                    <span class="w" aria-hidden="true" style="--i:1">at</span>
+                    <span class="w" aria-hidden="true" style="--i:2">your</span>
+                    <span class="w w--accent" aria-hidden="true" style="--i:3">fingertips.</span>
                 </h1>
-                <p class="hero-tagline" id="tagline">
-                    <span class="typing-text"></span>
-                </p>
-                <p class="hero-description">
-                    A beautifully crafted Material You app for executing ADB commands directly on your Android device —
-                    no PC required.
-                </p>
-                <div class="hero-buttons">
-                    <a href="https://github.com/DP-Hridayan/aShellYou/releases/latest" class="btn btn-primary"
-                        target="_blank" rel="noopener">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                        Download from GitHub
+                <p class="hero__lede">Run shell, ADB and fastboot commands on this phone or any other Android device. Mirror screens, read logs, flash partitions and move files, straight from your pocket.</p>
+                <div class="hero__cta">
+                    <a class="btn btn--primary btn--xl" href="https://github.com/DP-Hridayan/aShellYou/releases/latest" target="_blank" rel="noopener">
+                        <span class="ms" aria-hidden="true">download</span>Download APK
                     </a>
-                    <a href="#download" class="btn btn-secondary">
-                        More Options
+                    <a class="btn btn--tertiary btn--xl" href="https://github.com/DP-Hridayan/aShellYou" target="_blank" rel="noopener">
+                        <svg class="btn__svg" aria-hidden="true"><use href="#gh"/></svg>View source
                     </a>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number" id="github-stars">1.5k+</span>
-                        <span class="stat-label">GitHub Stars</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="github-downloads">100k+</span>
-                        <span class="stat-label">Downloads</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="github-contributors">14</span>
-                        <span class="stat-label">Contributors</span>
-                    </div>
-                </div>
+                <p class="hero__facts">Free and open source · GPL-3.0 · Android 9 and newer</p>
             </div>
-            <div class="hero-mockup">
-                <div class="phone-frame">
-                    <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/01.jpeg"
-                        alt="aShell You Screenshot" class="phone-screen" id="hero-screenshot">
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Powerful <span class="gradient-text">Features</span></h2>
-                <p class="section-subtitle">Everything you need to master ADB on your Android device</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Material Design 3 UI</h3>
-                    <p class="feature-description">Experience a clean, smooth, and responsive interface built with
-                        Material You design. Explore different color palettes in theme settings!</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                            <line x1="12" y1="18" x2="12.01" y2="18" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Execute Commands with Ease</h3>
-                    <p class="feature-description">Run ADB shell commands directly on your device using Shizuku, root
-                        access, or Wireless Debugging — all without needing a PC.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
-                            <line x1="6" y1="1" x2="6" y2="4" />
-                            <line x1="10" y1="1" x2="10" y2="4" />
-                            <line x1="14" y1="1" x2="14" y2="4" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Control Other Devices</h3>
-                    <p class="feature-description">Send ADB commands to other Android devices using OTG cable or
-                        Wireless Debugging — perfect for developers and tinkerers.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">ADB File Explorer</h3>
-                    <p class="feature-description">ADB push/pull based file manager helps you perform file operations
-                        such as delete, copy, move on connected devices.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="4 17 10 11 4 5" />
-                            <line x1="12" y1="19" x2="20" y2="19" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Continuous Commands</h3>
-                    <p class="feature-description">Seamlessly run long or continuous shell commands like logcat, top, or
-                        watch and view live updates without interruptions.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">Bookmark & Save</h3>
-                    <p class="feature-description">Save frequently used commands to bookmarks and export command outputs
-                        to files for future reference or sharing.</p>
-                </div>
-            </div>
-            <div class="features-extra">
-                <div class="extra-feature">
-                    <span class="extra-icon">🔍</span>
-                    <span>Search in Output</span>
-                </div>
-                <div class="extra-feature">
-                    <span class="extra-icon">📤</span>
-                    <span>Share Instantly</span>
-                </div>
-                <div class="extra-feature">
-                    <span class="extra-icon">🔃</span>
-                    <span>Backup & Restore</span>
-                </div>
-                <div class="extra-feature">
-                    <span class="extra-icon">🌑</span>
-                    <span>AMOLED Dark Theme</span>
-                </div>
-                <div class="extra-feature">
-                    <span class="extra-icon">📚</span>
-                    <span>Command Examples</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Screenshots Section -->
-    <section class="screenshots" id="screenshots">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">See it in <span class="gradient-text">Action</span></h2>
-                <p class="section-subtitle">Beautiful interface designed with attention to every detail</p>
-            </div>
-            <div class="carousel-container">
-                <button class="carousel-btn carousel-prev" id="carousel-prev" aria-label="Previous screenshot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6" />
-                    </svg>
-                </button>
-                <div class="carousel-track-container">
-                    <div class="carousel-track" id="carousel-track">
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/01.jpeg"
-                                    alt="Screenshot 1" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/02.jpeg"
-                                    alt="Screenshot 2" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/03.jpeg"
-                                    alt="Screenshot 3" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/04.jpeg"
-                                    alt="Screenshot 4" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/05.jpeg"
-                                    alt="Screenshot 5" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/06.jpeg"
-                                    alt="Screenshot 6" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/07.jpeg"
-                                    alt="Screenshot 7" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/08.jpeg"
-                                    alt="Screenshot 8" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/09.jpeg"
-                                    alt="Screenshot 9" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/10.jpeg"
-                                    alt="Screenshot 10" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/11.jpeg"
-                                    alt="Screenshot 11" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <div class="phone-frame small">
-                                <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/phoneScreenshots/12.jpeg"
-                                    alt="Screenshot 12" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn carousel-next" id="carousel-next" aria-label="Next screenshot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                </button>
-            </div>
-            <div class="carousel-dots" id="carousel-dots"></div>
-        </div>
-    </section>
-
-    <!-- Requirements Section -->
-    <section class="requirements" id="requirements">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Getting <span class="gradient-text">Started</span></h2>
-                <p class="section-subtitle">Choose your preferred method to run ADB commands</p>
-            </div>
-            <div class="requirements-grid">
-                <div class="requirement-card">
-                    <div class="requirement-icon shizuku">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M12 6v6l4 2" />
-                        </svg>
-                    </div>
-                    <h3>Shizuku</h3>
-                    <p>Run commands on your own device with Shizuku - no root required!</p>
-                    <a href="https://shizuku.rikka.app/" target="_blank" rel="noopener" class="requirement-link">Learn
-                        More →</a>
-                </div>
-                <div class="requirement-card">
-                    <div class="requirement-icon root">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    <h3>Root Access</h3>
-                    <p>Full system access with Magisk or other root solutions.</p>
-                    <span class="requirement-badge">Advanced</span>
-                </div>
-                <div class="requirement-card">
-                    <div class="requirement-icon wireless">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12.55a11 11 0 0114.08 0" />
-                            <path d="M1.42 9a16 16 0 0121.16 0" />
-                            <path d="M8.53 16.11a6 6 0 016.95 0" />
-                            <circle cx="12" cy="20" r="1" />
-                        </svg>
-                    </div>
-                    <h3>Wireless Debugging</h3>
-                    <p>Connect to other devices over WiFi - no cables needed!</p>
-                    <span class="requirement-badge success">No Root</span>
-                </div>
-                <div class="requirement-card">
-                    <div class="requirement-icon otg">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="4" y="4" width="16" height="16" rx="2" />
-                            <rect x="9" y="9" width="6" height="6" />
-                            <line x1="9" y1="2" x2="9" y2="4" />
-                            <line x1="15" y1="2" x2="15" y2="4" />
-                            <line x1="9" y1="20" x2="9" y2="22" />
-                            <line x1="15" y1="20" x2="15" y2="22" />
-                        </svg>
-                    </div>
-                    <h3>OTG Connection</h3>
-                    <p>Control other Android devices using a USB OTG cable.</p>
-                    <span class="requirement-badge success">No Root</span>
-                </div>
-            </div>
-            <div class="warning-box">
-                <div class="warning-icon">⚠️</div>
-                <div class="warning-content">
-                    <h4>Use with Caution</h4>
-                    <p>Using aShell You requires basic knowledge of ADB/Linux commands. aShell You is not responsible
-                        for any harm caused to your device by improper use of ADB commands.</p>
-                </div>
-            </div>
-            <a href="https://github.com/DP-Hridayan/aShellYou/wiki" target="_blank" rel="noopener"
-                class="btn btn-outline">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
-                    <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+            <div class="hero__art" aria-hidden="true">
+                <svg class="shape shape--hero" viewBox="0 0 100 100">
+                    <path d="M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z">
+                        <animate attributeName="d" dur="18s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33;0.66;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1" values="M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z;M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z;M97.30 50.00 L97.03 52.46 L96.22 54.86 L94.97 57.12 L93.36 59.22 L91.53 61.13 L89.63 62.88 L87.78 64.50 L86.10 66.07 L84.67 67.66 L83.52 69.35 L82.63 71.19 L81.97 73.23 L81.45 75.47 L80.97 77.88 L80.41 80.41 L79.66 82.94 L78.65 85.38 L77.32 87.60 L75.65 89.49 L73.65 90.96 L71.38 91.96 L68.90 92.46 L66.32 92.50 L63.70 92.16 L61.13 91.53 L58.66 90.76 L56.33 89.97 L54.13 89.30 L52.04 88.86 L50.00 88.70 L47.96 88.86 L45.87 89.30 L43.67 89.97 L41.34 90.76 L38.87 91.53 L36.30 92.16 L33.68 92.50 L31.10 92.46 L28.62 91.96 L26.35 90.96 L24.35 89.49 L22.68 87.60 L21.35 85.38 L20.34 82.94 L19.59 80.41 L19.03 77.88 L18.55 75.47 L18.03 73.23 L17.37 71.19 L16.48 69.35 L15.33 67.66 L13.90 66.07 L12.22 64.50 L10.37 62.88 L8.47 61.13 L6.64 59.22 L5.03 57.12 L3.78 54.86 L2.97 52.46 L2.70 50.00 L2.97 47.54 L3.78 45.14 L5.03 42.88 L6.64 40.78 L8.47 38.87 L10.37 37.12 L12.22 35.50 L13.90 33.93 L15.33 32.34 L16.48 30.65 L17.37 28.81 L18.03 26.77 L18.55 24.53 L19.03 22.12 L19.59 19.59 L20.34 17.06 L21.35 14.62 L22.68 12.40 L24.35 10.51 L26.35 9.04 L28.62 8.04 L31.10 7.54 L33.68 7.50 L36.30 7.84 L38.87 8.47 L41.34 9.24 L43.67 10.03 L45.87 10.70 L47.96 11.14 L50.00 11.30 L52.04 11.14 L54.13 10.70 L56.33 10.03 L58.66 9.24 L61.13 8.47 L63.70 7.84 L66.32 7.50 L68.90 7.54 L71.38 8.04 L73.65 9.04 L75.65 10.51 L77.32 12.40 L78.65 14.62 L79.66 17.06 L80.41 19.59 L80.97 22.12 L81.45 24.53 L81.97 26.77 L82.63 28.81 L83.52 30.65 L84.67 32.34 L86.10 33.93 L87.78 35.50 L89.63 37.12 L91.53 38.87 L93.36 40.78 L94.97 42.88 L96.22 45.14 L97.03 47.54Z;M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z"/>
+                    </path>
                 </svg>
-                Read the Wiki for Setup Guides
-            </a>
-        </div>
-    </section>
+                <figure class="shot" data-parallax="0.04">
+                    <img src="assets/screens/home.webp" width="720" height="1514" alt="" decoding="async" fetchpriority="high">
+                </figure>
+            </div>
+        </section>
 
-    <!-- Download Section -->
-    <section class="download" id="download">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get <span class="gradient-text">aShell You</span></h2>
-                <p class="section-subtitle">Download from your preferred source</p>
-            </div>
-            <div class="version-badge">
-                <span>Latest Version</span>
-                <strong id="latest-version">v7.1.0</strong>
-            </div>
-            <div class="download-grid">
-                <a href="https://github.com/DP-Hridayan/aShellYou/releases/latest" target="_blank" rel="noopener"
-                    class="download-card primary">
-                    <div class="download-info">
-                        <h3>GitHub Releases</h3>
-                        <p>Get the latest APK directly</p>
-                    </div>
-                    <span class="download-arrow">→</span>
-                </a>
-                <a href="https://apt.izzysoft.de/fdroid/index/apk/in.hridayan.ashell" target="_blank" rel="noopener"
-                    class="download-card">
-                    <div class="download-info">
-                        <h3>IzzyOnDroid</h3>
-                        <p>F-Droid compatible repository</p>
-                    </div>
-                    <span class="download-arrow">→</span>
-                </a>
-                <a href="https://f-droid.org/packages/in.hridayan.ashell" target="_blank" rel="noopener"
-                    class="download-card">
-                    <div class="download-info">
-                        <h3>F-Droid</h3>
-                        <p>Open source app store</p>
-                    </div>
-                    <span class="download-arrow">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
+        <section class="numbers" aria-label="Project numbers" data-reveal>
+            <dl class="numbers__row">
+                <div data-live hidden><dt>GitHub stars</dt><dd data-stat="stars" data-count>0</dd></div>
+                <div data-live hidden><dt>Downloads on GitHub</dt><dd data-stat="downloads" data-count data-suffix="+">0</dd></div>
+                <div data-live hidden><dt>Contributors</dt><dd data-stat="contributors" data-count>0</dd></div>
+                <div><dt>Languages</dt><dd data-count data-to="16">16</dd></div>
+            </dl>
+        </section>
 
-    <!-- Community Section -->
-    <section class="community" id="community">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Join the <span class="gradient-text">Community</span></h2>
-                <p class="section-subtitle">Contribute, translate, and connect with other users</p>
+        <section class="home" id="home" aria-labelledby="home-title">
+            <div class="home__intro">
+                <h2 id="home-title" class="display" data-reveal>Everything starts at home.</h2>
+                <p class="lede" data-reveal>The app opens on one screen with every way in. Here is that screen, card by card.</p>
             </div>
-            <div class="community-grid">
-                <a href="https://github.com/DP-Hridayan/aShellYou" target="_blank" rel="noopener"
-                    class="community-card github">
-                    <div class="community-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                        </svg>
-                    </div>
-                    <h3>Contribute on GitHub</h3>
-                    <p>Report issues, suggest features, or submit pull requests</p>
-                </a>
-                <a href="https://crowdin.com/project/ashellyou" target="_blank" rel="noopener"
-                    class="community-card crowdin">
-                    <div class="community-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                        </svg>
-                    </div>
-                    <h3>Help Translate</h3>
-                    <p>Make aShell You available in your language on Crowdin</p>
-                </a>
-                <a href="https://t.me/AShellYou" target="_blank" rel="noopener" class="community-card telegram">
-                    <div class="community-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-                        </svg>
-                    </div>
-                    <h3>Join Telegram</h3>
-                    <p>Chat with developers and other users</p>
-                </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="https://raw.githubusercontent.com/DP-Hridayan/aShellYou/master/fastlane/metadata/android/en-US/images/icon.png"
-                        alt="aShell You Logo" class="footer-logo">
-                    <div class="footer-info">
-                        <h3>aShell You</h3>
-                        <p>A Material You designed app for your ADB needs</p>
-                    </div>
+            <div class="home__cards">
+                <h3 class="group" data-reveal>ADB</h3>
+                <div class="cards">
+                    <article class="mcard" data-reveal style="--i:0">
+                        <div class="mcard__head">
+                            <span class="mcard__icon"><svg aria-hidden="true"><use href="#head"/></svg></span>
+                            <h4>Local ADB</h4>
+                        </div>
+                        <p class="mcard__status"><i></i>Shizuku, root or basic shell</p>
+                        <p class="mcard__body">Commands on this phone. Shizuku warms up at launch so the first command starts instantly, root goes through <code>su</code>, and basic shell needs nothing at all.</p>
+                        <ul class="chips"><li>This device</li></ul>
+                    </article>
+                    <article class="mcard" data-reveal style="--i:1">
+                        <div class="mcard__head">
+                            <span class="mcard__icon mcard__icon--t ms">cable</span>
+                            <h4>ADB via OTG</h4>
+                        </div>
+                        <p class="mcard__status mcard__status--t"><i></i>No root or Shizuku needed</p>
+                        <p class="mcard__body">Plug another Android device into yours with an OTG adapter. Shell, files, logcat, mirroring, fastboot and sideload all run over the cable.</p>
+                        <ul class="chips"><li>Other device</li></ul>
+                    </article>
+                    <article class="mcard mcard--wide" data-reveal style="--i:2">
+                        <div class="mcard__head">
+                            <span class="mcard__icon ms">wifi</span>
+                            <h4>ADB via Wireless Debugging</h4>
+                        </div>
+                        <p class="mcard__body">Pair this phone with itself by typing the code into a notification, or pair another device on your Wi-Fi with a QR code or a six-digit code. Android 11 and newer. Saved devices reconnect in one tap, and real <code>adb</code> verbs like <code>tcpip</code>, <code>reboot</code> and <code>remount</code> work too.</p>
+                        <ul class="chips"><li>This device</li><li>Other device</li></ul>
+                        <div class="mcard__actions">
+                            <a class="btn btn--tertiary btn--lg" href="https://github.com/DP-Hridayan/aShellYou/wiki" target="_blank" rel="noopener"><span class="ms" aria-hidden="true">link</span>Pairing guide</a>
+                            <a class="btn btn--primary btn--lg" href="#download"><span class="ms ms--fill" aria-hidden="true">play_arrow</span>Get started</a>
+                        </div>
+                    </article>
                 </div>
-                <div class="footer-links">
-                    <a href="https://github.com/DP-Hridayan/aShellYou" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://github.com/DP-Hridayan/aShellYou/wiki" target="_blank" rel="noopener">Wiki</a>
-                    <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/LICENSE.md" target="_blank"
-                        rel="noopener">License</a>
-                    <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/PRIVACY_POLICY.md" target="_blank" rel="noopener">Privacy Policy</a>
-                    <a href="https://crowdin.com/project/ashellyou" target="_blank" rel="noopener">Translate</a>
+
+                <h3 class="group" data-reveal>Fastboot &amp; Recovery</h3>
+                <div class="cards">
+                    <article class="mcard" data-reveal style="--i:0">
+                        <div class="mcard__head">
+                            <span class="mcard__icon ms">bolt</span>
+                            <h4>Fastboot</h4>
+                        </div>
+                        <p class="mcard__status"><i></i>New in v8</p>
+                        <p class="mcard__body">Flash partitions, read variables, wipe userdata and reboot to system, bootloader, recovery or fastbootd.</p>
+                        <ul class="chips"><li>Other device</li></ul>
+                    </article>
+                    <article class="mcard" data-reveal style="--i:1">
+                        <div class="mcard__head">
+                            <span class="mcard__icon mcard__icon--t ms">install_mobile</span>
+                            <h4>ADB Sideload</h4>
+                        </div>
+                        <p class="mcard__status mcard__status--t"><i></i>New in v8</p>
+                        <p class="mcard__body">Send an OTA ZIP to a device in recovery. Progress stays in a notification while you use other apps.</p>
+                        <ul class="chips"><li>Other device</li></ul>
+                    </article>
+                </div>
+
+                <h3 class="group" data-reveal>Utilities</h3>
+                <div class="cards">
+                    <article class="mcard" data-reveal style="--i:0">
+                        <div class="mcard__head">
+                            <span class="mcard__icon mcard__icon--t ms">receipt_long</span>
+                            <h4>Logcat</h4>
+                        </div>
+                        <p class="mcard__status mcard__status--t"><i></i>New in v8</p>
+                        <p class="mcard__body">Live logs from this phone or another, with stacked filter profiles by package, tag, PID and level.</p>
+                    </article>
+                    <article class="mcard" data-reveal style="--i:1">
+                        <div class="mcard__head">
+                            <span class="mcard__icon ms ms--fill">auto_awesome</span>
+                            <h4>ADB Agent</h4>
+                        </div>
+                        <p class="mcard__status"><i></i>New in v8 · GitHub build</p>
+                        <p class="mcard__body">Ask in plain words. It reads diagnostics and runs commands, each one waiting for your approval.</p>
+                    </article>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>Designed and developed by <a href="https://github.com/DP-Hridayan" target="_blank" rel="noopener">DP
-                        Hridayan</a> © 2024</p>
-                <p>Licensed under <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/LICENSE.md"
-                        target="_blank" rel="noopener">GPL-3.0</a></p>
+        </section>
+
+        <section class="tour" id="tour" aria-labelledby="tour-title">
+            <div class="tour__head">
+                <h2 id="tour-title" class="display" data-reveal>Built for real work.</h2>
+                <p class="lede" data-reveal>Four screens from the v8 pre-release. Pick one.</p>
             </div>
+
+            <div class="segmented" role="tablist" aria-label="Feature screens" data-reveal>
+                <span class="segmented__thumb" aria-hidden="true"></span>
+                <button role="tab" id="tab-shell" aria-controls="panel-shell" aria-selected="true">Shell</button>
+                <button role="tab" id="tab-mirror" aria-controls="panel-mirror" aria-selected="false" tabindex="-1">Mirror</button>
+                <button role="tab" id="tab-logcat" aria-controls="panel-logcat" aria-selected="false" tabindex="-1">Logcat</button>
+                <button role="tab" id="tab-fastboot" aria-controls="panel-fastboot" aria-selected="false" tabindex="-1">Fastboot</button>
+            </div>
+
+            <div class="panels">
+                <div class="panel is-active" role="tabpanel" id="panel-shell" aria-labelledby="tab-shell" tabindex="0">
+                    <div class="panel__text">
+                        <h3 class="headline">A terminal that knows ADB.</h3>
+                        <p>Continuous output for <code>logcat</code> and <code>top</code>, an Abort button that stops the process, and suggestions for commands, package names and permissions while you type.</p>
+                        <ul class="points">
+                            <li>Search, save and share output</li>
+                            <li>Bookmarks and history</li>
+                            <li>Errors print in their own colour</li>
+                        </ul>
+                    </div>
+                    <figure class="panel__shot">
+                        <svg class="shape shape--panel" viewBox="0 0 100 100" aria-hidden="true"><path d="M97.03 50.00 L96.29 52.43 L94.54 54.68 L92.83 56.78 L92.08 58.94 L92.49 61.38 L93.39 64.10 L93.74 66.79 L92.80 69.06 L90.65 70.71 L88.09 71.99 L86.08 73.43 L85.08 75.49 L84.81 78.19 L84.45 81.02 L83.25 83.25 L81.02 84.45 L78.19 84.81 L75.49 85.08 L73.43 86.08 L71.99 88.09 L70.71 90.65 L69.06 92.80 L66.79 93.74 L64.10 93.39 L61.38 92.49 L58.94 92.08 L56.78 92.83 L54.68 94.54 L52.43 96.29 L50.00 97.03 L47.57 96.29 L45.32 94.54 L43.22 92.83 L41.06 92.08 L38.62 92.49 L35.90 93.39 L33.21 93.74 L30.94 92.80 L29.29 90.65 L28.01 88.09 L26.57 86.08 L24.51 85.08 L21.81 84.81 L18.98 84.45 L16.75 83.25 L15.55 81.02 L15.19 78.19 L14.92 75.49 L13.92 73.43 L11.91 71.99 L9.35 70.71 L7.20 69.06 L6.26 66.79 L6.61 64.10 L7.51 61.38 L7.92 58.94 L7.17 56.78 L5.46 54.68 L3.71 52.43 L2.98 50.00 L3.71 47.57 L5.46 45.32 L7.17 43.22 L7.92 41.06 L7.51 38.62 L6.61 35.90 L6.26 33.21 L7.20 30.94 L9.35 29.29 L11.91 28.01 L13.92 26.57 L14.92 24.51 L15.19 21.81 L15.55 18.98 L16.75 16.75 L18.98 15.55 L21.81 15.19 L24.51 14.92 L26.57 13.92 L28.01 11.91 L29.29 9.35 L30.94 7.20 L33.21 6.26 L35.90 6.61 L38.62 7.51 L41.06 7.92 L43.22 7.17 L45.32 5.46 L47.57 3.71 L50.00 2.98 L52.43 3.71 L54.68 5.46 L56.78 7.17 L58.94 7.92 L61.38 7.51 L64.10 6.61 L66.79 6.26 L69.06 7.20 L70.71 9.35 L71.99 11.91 L73.43 13.92 L75.49 14.92 L78.19 15.19 L81.02 15.55 L83.25 16.75 L84.45 18.98 L84.81 21.81 L85.08 24.51 L86.08 26.57 L88.09 28.01 L90.65 29.29 L92.80 30.94 L93.74 33.21 L93.39 35.90 L92.49 38.62 L92.08 41.06 L92.83 43.22 L94.54 45.32 L96.29 47.57Z"><animate attributeName="d" dur="10s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" values="M97.03 50.00 L96.29 52.43 L94.54 54.68 L92.83 56.78 L92.08 58.94 L92.49 61.38 L93.39 64.10 L93.74 66.79 L92.80 69.06 L90.65 70.71 L88.09 71.99 L86.08 73.43 L85.08 75.49 L84.81 78.19 L84.45 81.02 L83.25 83.25 L81.02 84.45 L78.19 84.81 L75.49 85.08 L73.43 86.08 L71.99 88.09 L70.71 90.65 L69.06 92.80 L66.79 93.74 L64.10 93.39 L61.38 92.49 L58.94 92.08 L56.78 92.83 L54.68 94.54 L52.43 96.29 L50.00 97.03 L47.57 96.29 L45.32 94.54 L43.22 92.83 L41.06 92.08 L38.62 92.49 L35.90 93.39 L33.21 93.74 L30.94 92.80 L29.29 90.65 L28.01 88.09 L26.57 86.08 L24.51 85.08 L21.81 84.81 L18.98 84.45 L16.75 83.25 L15.55 81.02 L15.19 78.19 L14.92 75.49 L13.92 73.43 L11.91 71.99 L9.35 70.71 L7.20 69.06 L6.26 66.79 L6.61 64.10 L7.51 61.38 L7.92 58.94 L7.17 56.78 L5.46 54.68 L3.71 52.43 L2.98 50.00 L3.71 47.57 L5.46 45.32 L7.17 43.22 L7.92 41.06 L7.51 38.62 L6.61 35.90 L6.26 33.21 L7.20 30.94 L9.35 29.29 L11.91 28.01 L13.92 26.57 L14.92 24.51 L15.19 21.81 L15.55 18.98 L16.75 16.75 L18.98 15.55 L21.81 15.19 L24.51 14.92 L26.57 13.92 L28.01 11.91 L29.29 9.35 L30.94 7.20 L33.21 6.26 L35.90 6.61 L38.62 7.51 L41.06 7.92 L43.22 7.17 L45.32 5.46 L47.57 3.71 L50.00 2.98 L52.43 3.71 L54.68 5.46 L56.78 7.17 L58.94 7.92 L61.38 7.51 L64.10 6.61 L66.79 6.26 L69.06 7.20 L70.71 9.35 L71.99 11.91 L73.43 13.92 L75.49 14.92 L78.19 15.19 L81.02 15.55 L83.25 16.75 L84.45 18.98 L84.81 21.81 L85.08 24.51 L86.08 26.57 L88.09 28.01 L90.65 29.29 L92.80 30.94 L93.74 33.21 L93.39 35.90 L92.49 38.62 L92.08 41.06 L92.83 43.22 L94.54 45.32 L96.29 47.57Z;M97.30 50.00 L97.03 52.46 L96.22 54.86 L94.97 57.12 L93.36 59.22 L91.53 61.13 L89.63 62.88 L87.78 64.50 L86.10 66.07 L84.67 67.66 L83.52 69.35 L82.63 71.19 L81.97 73.23 L81.45 75.47 L80.97 77.88 L80.41 80.41 L79.66 82.94 L78.65 85.38 L77.32 87.60 L75.65 89.49 L73.65 90.96 L71.38 91.96 L68.90 92.46 L66.32 92.50 L63.70 92.16 L61.13 91.53 L58.66 90.76 L56.33 89.97 L54.13 89.30 L52.04 88.86 L50.00 88.70 L47.96 88.86 L45.87 89.30 L43.67 89.97 L41.34 90.76 L38.87 91.53 L36.30 92.16 L33.68 92.50 L31.10 92.46 L28.62 91.96 L26.35 90.96 L24.35 89.49 L22.68 87.60 L21.35 85.38 L20.34 82.94 L19.59 80.41 L19.03 77.88 L18.55 75.47 L18.03 73.23 L17.37 71.19 L16.48 69.35 L15.33 67.66 L13.90 66.07 L12.22 64.50 L10.37 62.88 L8.47 61.13 L6.64 59.22 L5.03 57.12 L3.78 54.86 L2.97 52.46 L2.70 50.00 L2.97 47.54 L3.78 45.14 L5.03 42.88 L6.64 40.78 L8.47 38.87 L10.37 37.12 L12.22 35.50 L13.90 33.93 L15.33 32.34 L16.48 30.65 L17.37 28.81 L18.03 26.77 L18.55 24.53 L19.03 22.12 L19.59 19.59 L20.34 17.06 L21.35 14.62 L22.68 12.40 L24.35 10.51 L26.35 9.04 L28.62 8.04 L31.10 7.54 L33.68 7.50 L36.30 7.84 L38.87 8.47 L41.34 9.24 L43.67 10.03 L45.87 10.70 L47.96 11.14 L50.00 11.30 L52.04 11.14 L54.13 10.70 L56.33 10.03 L58.66 9.24 L61.13 8.47 L63.70 7.84 L66.32 7.50 L68.90 7.54 L71.38 8.04 L73.65 9.04 L75.65 10.51 L77.32 12.40 L78.65 14.62 L79.66 17.06 L80.41 19.59 L80.97 22.12 L81.45 24.53 L81.97 26.77 L82.63 28.81 L83.52 30.65 L84.67 32.34 L86.10 33.93 L87.78 35.50 L89.63 37.12 L91.53 38.87 L93.36 40.78 L94.97 42.88 L96.22 45.14 L97.03 47.54Z;M97.03 50.00 L96.29 52.43 L94.54 54.68 L92.83 56.78 L92.08 58.94 L92.49 61.38 L93.39 64.10 L93.74 66.79 L92.80 69.06 L90.65 70.71 L88.09 71.99 L86.08 73.43 L85.08 75.49 L84.81 78.19 L84.45 81.02 L83.25 83.25 L81.02 84.45 L78.19 84.81 L75.49 85.08 L73.43 86.08 L71.99 88.09 L70.71 90.65 L69.06 92.80 L66.79 93.74 L64.10 93.39 L61.38 92.49 L58.94 92.08 L56.78 92.83 L54.68 94.54 L52.43 96.29 L50.00 97.03 L47.57 96.29 L45.32 94.54 L43.22 92.83 L41.06 92.08 L38.62 92.49 L35.90 93.39 L33.21 93.74 L30.94 92.80 L29.29 90.65 L28.01 88.09 L26.57 86.08 L24.51 85.08 L21.81 84.81 L18.98 84.45 L16.75 83.25 L15.55 81.02 L15.19 78.19 L14.92 75.49 L13.92 73.43 L11.91 71.99 L9.35 70.71 L7.20 69.06 L6.26 66.79 L6.61 64.10 L7.51 61.38 L7.92 58.94 L7.17 56.78 L5.46 54.68 L3.71 52.43 L2.98 50.00 L3.71 47.57 L5.46 45.32 L7.17 43.22 L7.92 41.06 L7.51 38.62 L6.61 35.90 L6.26 33.21 L7.20 30.94 L9.35 29.29 L11.91 28.01 L13.92 26.57 L14.92 24.51 L15.19 21.81 L15.55 18.98 L16.75 16.75 L18.98 15.55 L21.81 15.19 L24.51 14.92 L26.57 13.92 L28.01 11.91 L29.29 9.35 L30.94 7.20 L33.21 6.26 L35.90 6.61 L38.62 7.51 L41.06 7.92 L43.22 7.17 L45.32 5.46 L47.57 3.71 L50.00 2.98 L52.43 3.71 L54.68 5.46 L56.78 7.17 L58.94 7.92 L61.38 7.51 L64.10 6.61 L66.79 6.26 L69.06 7.20 L70.71 9.35 L71.99 11.91 L73.43 13.92 L75.49 14.92 L78.19 15.19 L81.02 15.55 L83.25 16.75 L84.45 18.98 L84.81 21.81 L85.08 24.51 L86.08 26.57 L88.09 28.01 L90.65 29.29 L92.80 30.94 L93.74 33.21 L93.39 35.90 L92.49 38.62 L92.08 41.06 L92.83 43.22 L94.54 45.32 L96.29 47.57Z"/></path></svg>
+                        <img src="assets/screens/shell.webp" width="720" height="1514" alt="Shell screen showing the output of dumpsys battery, with the Shizuku mode chip and an AI button beside the command field" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+
+                <div class="panel" role="tabpanel" id="panel-mirror" aria-labelledby="tab-mirror" tabindex="0" hidden>
+                    <div class="panel__text">
+                        <h3 class="headline">See it and touch it.</h3>
+                        <p>Mirror another device over USB or Wi-Fi and control it with multi-touch. Taps, swipes and pinches go straight through, and full screen keeps a floating control within reach.</p>
+                        <ul class="points">
+                            <li>Power, volume and screenshot keys</li>
+                            <li>Immersive full screen</li>
+                            <li>Built on scrcpy 4.1</li>
+                        </ul>
+                    </div>
+                    <figure class="panel__shot">
+                        <svg class="shape shape--panel" viewBox="0 0 100 100" aria-hidden="true"><path d="M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z"><animate attributeName="d" dur="12s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" values="M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z;M98.80 50.00 L98.54 52.54 L97.78 55.02 L96.54 57.37 L94.89 59.54 L92.89 61.49 L90.63 63.20 L88.20 64.66 L85.70 65.90 L83.22 66.93 L80.83 67.80 L78.61 68.58 L76.60 69.33 L74.84 70.11 L73.33 71.01 L72.06 72.06 L71.01 73.33 L70.11 74.84 L69.33 76.60 L68.58 78.61 L67.80 80.83 L66.93 83.22 L65.90 85.70 L64.66 88.20 L63.20 90.63 L61.49 92.89 L59.54 94.89 L57.37 96.54 L55.02 97.78 L52.54 98.54 L50.00 98.80 L47.46 98.54 L44.98 97.78 L42.63 96.54 L40.46 94.89 L38.51 92.89 L36.80 90.63 L35.34 88.20 L34.10 85.70 L33.07 83.22 L32.20 80.83 L31.42 78.61 L30.67 76.60 L29.89 74.84 L28.99 73.33 L27.94 72.06 L26.67 71.01 L25.16 70.11 L23.40 69.33 L21.39 68.58 L19.17 67.80 L16.78 66.93 L14.30 65.90 L11.80 64.66 L9.37 63.20 L7.11 61.49 L5.11 59.54 L3.46 57.37 L2.22 55.02 L1.46 52.54 L1.20 50.00 L1.46 47.46 L2.22 44.98 L3.46 42.63 L5.11 40.46 L7.11 38.51 L9.37 36.80 L11.80 35.34 L14.30 34.10 L16.78 33.07 L19.17 32.20 L21.39 31.42 L23.40 30.67 L25.16 29.89 L26.67 28.99 L27.94 27.94 L28.99 26.67 L29.89 25.16 L30.67 23.40 L31.42 21.39 L32.20 19.17 L33.07 16.78 L34.10 14.30 L35.34 11.80 L36.80 9.37 L38.51 7.11 L40.46 5.11 L42.63 3.46 L44.98 2.22 L47.46 1.46 L50.00 1.20 L52.54 1.46 L55.02 2.22 L57.37 3.46 L59.54 5.11 L61.49 7.11 L63.20 9.37 L64.66 11.80 L65.90 14.30 L66.93 16.78 L67.80 19.17 L68.58 21.39 L69.33 23.40 L70.11 25.16 L71.01 26.67 L72.06 27.94 L73.33 28.99 L74.84 29.89 L76.60 30.67 L78.61 31.42 L80.83 32.20 L83.22 33.07 L85.70 34.10 L88.20 35.34 L90.63 36.80 L92.89 38.51 L94.89 40.46 L96.54 42.63 L97.78 44.98 L98.54 47.46Z;M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z"/></path></svg>
+                        <img src="assets/screens/mirror.webp" width="720" height="1514" alt="Mirror screen controlling a Pixel 7 Pro over OTG, with navigation and hardware key bars below" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+
+                <div class="panel" role="tabpanel" id="panel-logcat" aria-labelledby="tab-logcat" tabindex="0" hidden>
+                    <div class="panel__text">
+                        <h3 class="headline">Logs you can read.</h3>
+                        <p>Stream logcat in a foreground service that keeps going when you switch apps. Colour bars mark each level, and filter profiles stack: include one app, exclude the noisy ones.</p>
+                        <ul class="points">
+                            <li>Filter by package, tag, PID or TID</li>
+                            <li>Pause, resume and search</li>
+                            <li>This device or another one</li>
+                        </ul>
+                    </div>
+                    <figure class="panel__shot">
+                        <svg class="shape shape--panel" viewBox="0 0 100 100" aria-hidden="true"><path d="M97.30 50.00 L97.03 52.46 L96.22 54.86 L94.97 57.12 L93.36 59.22 L91.53 61.13 L89.63 62.88 L87.78 64.50 L86.10 66.07 L84.67 67.66 L83.52 69.35 L82.63 71.19 L81.97 73.23 L81.45 75.47 L80.97 77.88 L80.41 80.41 L79.66 82.94 L78.65 85.38 L77.32 87.60 L75.65 89.49 L73.65 90.96 L71.38 91.96 L68.90 92.46 L66.32 92.50 L63.70 92.16 L61.13 91.53 L58.66 90.76 L56.33 89.97 L54.13 89.30 L52.04 88.86 L50.00 88.70 L47.96 88.86 L45.87 89.30 L43.67 89.97 L41.34 90.76 L38.87 91.53 L36.30 92.16 L33.68 92.50 L31.10 92.46 L28.62 91.96 L26.35 90.96 L24.35 89.49 L22.68 87.60 L21.35 85.38 L20.34 82.94 L19.59 80.41 L19.03 77.88 L18.55 75.47 L18.03 73.23 L17.37 71.19 L16.48 69.35 L15.33 67.66 L13.90 66.07 L12.22 64.50 L10.37 62.88 L8.47 61.13 L6.64 59.22 L5.03 57.12 L3.78 54.86 L2.97 52.46 L2.70 50.00 L2.97 47.54 L3.78 45.14 L5.03 42.88 L6.64 40.78 L8.47 38.87 L10.37 37.12 L12.22 35.50 L13.90 33.93 L15.33 32.34 L16.48 30.65 L17.37 28.81 L18.03 26.77 L18.55 24.53 L19.03 22.12 L19.59 19.59 L20.34 17.06 L21.35 14.62 L22.68 12.40 L24.35 10.51 L26.35 9.04 L28.62 8.04 L31.10 7.54 L33.68 7.50 L36.30 7.84 L38.87 8.47 L41.34 9.24 L43.67 10.03 L45.87 10.70 L47.96 11.14 L50.00 11.30 L52.04 11.14 L54.13 10.70 L56.33 10.03 L58.66 9.24 L61.13 8.47 L63.70 7.84 L66.32 7.50 L68.90 7.54 L71.38 8.04 L73.65 9.04 L75.65 10.51 L77.32 12.40 L78.65 14.62 L79.66 17.06 L80.41 19.59 L80.97 22.12 L81.45 24.53 L81.97 26.77 L82.63 28.81 L83.52 30.65 L84.67 32.34 L86.10 33.93 L87.78 35.50 L89.63 37.12 L91.53 38.87 L93.36 40.78 L94.97 42.88 L96.22 45.14 L97.03 47.54Z"><animate attributeName="d" dur="11s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" values="M97.30 50.00 L97.03 52.46 L96.22 54.86 L94.97 57.12 L93.36 59.22 L91.53 61.13 L89.63 62.88 L87.78 64.50 L86.10 66.07 L84.67 67.66 L83.52 69.35 L82.63 71.19 L81.97 73.23 L81.45 75.47 L80.97 77.88 L80.41 80.41 L79.66 82.94 L78.65 85.38 L77.32 87.60 L75.65 89.49 L73.65 90.96 L71.38 91.96 L68.90 92.46 L66.32 92.50 L63.70 92.16 L61.13 91.53 L58.66 90.76 L56.33 89.97 L54.13 89.30 L52.04 88.86 L50.00 88.70 L47.96 88.86 L45.87 89.30 L43.67 89.97 L41.34 90.76 L38.87 91.53 L36.30 92.16 L33.68 92.50 L31.10 92.46 L28.62 91.96 L26.35 90.96 L24.35 89.49 L22.68 87.60 L21.35 85.38 L20.34 82.94 L19.59 80.41 L19.03 77.88 L18.55 75.47 L18.03 73.23 L17.37 71.19 L16.48 69.35 L15.33 67.66 L13.90 66.07 L12.22 64.50 L10.37 62.88 L8.47 61.13 L6.64 59.22 L5.03 57.12 L3.78 54.86 L2.97 52.46 L2.70 50.00 L2.97 47.54 L3.78 45.14 L5.03 42.88 L6.64 40.78 L8.47 38.87 L10.37 37.12 L12.22 35.50 L13.90 33.93 L15.33 32.34 L16.48 30.65 L17.37 28.81 L18.03 26.77 L18.55 24.53 L19.03 22.12 L19.59 19.59 L20.34 17.06 L21.35 14.62 L22.68 12.40 L24.35 10.51 L26.35 9.04 L28.62 8.04 L31.10 7.54 L33.68 7.50 L36.30 7.84 L38.87 8.47 L41.34 9.24 L43.67 10.03 L45.87 10.70 L47.96 11.14 L50.00 11.30 L52.04 11.14 L54.13 10.70 L56.33 10.03 L58.66 9.24 L61.13 8.47 L63.70 7.84 L66.32 7.50 L68.90 7.54 L71.38 8.04 L73.65 9.04 L75.65 10.51 L77.32 12.40 L78.65 14.62 L79.66 17.06 L80.41 19.59 L80.97 22.12 L81.45 24.53 L81.97 26.77 L82.63 28.81 L83.52 30.65 L84.67 32.34 L86.10 33.93 L87.78 35.50 L89.63 37.12 L91.53 38.87 L93.36 40.78 L94.97 42.88 L96.22 45.14 L97.03 47.54Z;M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z;M97.30 50.00 L97.03 52.46 L96.22 54.86 L94.97 57.12 L93.36 59.22 L91.53 61.13 L89.63 62.88 L87.78 64.50 L86.10 66.07 L84.67 67.66 L83.52 69.35 L82.63 71.19 L81.97 73.23 L81.45 75.47 L80.97 77.88 L80.41 80.41 L79.66 82.94 L78.65 85.38 L77.32 87.60 L75.65 89.49 L73.65 90.96 L71.38 91.96 L68.90 92.46 L66.32 92.50 L63.70 92.16 L61.13 91.53 L58.66 90.76 L56.33 89.97 L54.13 89.30 L52.04 88.86 L50.00 88.70 L47.96 88.86 L45.87 89.30 L43.67 89.97 L41.34 90.76 L38.87 91.53 L36.30 92.16 L33.68 92.50 L31.10 92.46 L28.62 91.96 L26.35 90.96 L24.35 89.49 L22.68 87.60 L21.35 85.38 L20.34 82.94 L19.59 80.41 L19.03 77.88 L18.55 75.47 L18.03 73.23 L17.37 71.19 L16.48 69.35 L15.33 67.66 L13.90 66.07 L12.22 64.50 L10.37 62.88 L8.47 61.13 L6.64 59.22 L5.03 57.12 L3.78 54.86 L2.97 52.46 L2.70 50.00 L2.97 47.54 L3.78 45.14 L5.03 42.88 L6.64 40.78 L8.47 38.87 L10.37 37.12 L12.22 35.50 L13.90 33.93 L15.33 32.34 L16.48 30.65 L17.37 28.81 L18.03 26.77 L18.55 24.53 L19.03 22.12 L19.59 19.59 L20.34 17.06 L21.35 14.62 L22.68 12.40 L24.35 10.51 L26.35 9.04 L28.62 8.04 L31.10 7.54 L33.68 7.50 L36.30 7.84 L38.87 8.47 L41.34 9.24 L43.67 10.03 L45.87 10.70 L47.96 11.14 L50.00 11.30 L52.04 11.14 L54.13 10.70 L56.33 10.03 L58.66 9.24 L61.13 8.47 L63.70 7.84 L66.32 7.50 L68.90 7.54 L71.38 8.04 L73.65 9.04 L75.65 10.51 L77.32 12.40 L78.65 14.62 L79.66 17.06 L80.41 19.59 L80.97 22.12 L81.45 24.53 L81.97 26.77 L82.63 28.81 L83.52 30.65 L84.67 32.34 L86.10 33.93 L87.78 35.50 L89.63 37.12 L91.53 38.87 L93.36 40.78 L94.97 42.88 L96.22 45.14 L97.03 47.54Z"/></path></svg>
+                        <img src="assets/screens/logcat.webp" width="720" height="1514" alt="Logcat screen with colour-coded rows by level and tabs for this device and other device" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+
+                <div class="panel" role="tabpanel" id="panel-fastboot" aria-labelledby="tab-fastboot" tabindex="0" hidden>
+                    <div class="panel__text">
+                        <h3 class="headline">Fastboot without the laptop.</h3>
+                        <p>Plug in a device in bootloader mode and see its codename, slot and lock state. Flash with a slide to confirm, read variables, wipe data, or drop to the console for raw commands.</p>
+                        <ul class="points">
+                            <li>Flash any partition</li>
+                            <li>Wipe data, get variables</li>
+                            <li>Reboot to any mode</li>
+                        </ul>
+                    </div>
+                    <figure class="panel__shot">
+                        <svg class="shape shape--panel" viewBox="0 0 100 100" aria-hidden="true"><path d="M98.80 50.00 L98.54 52.54 L97.78 55.02 L96.54 57.37 L94.89 59.54 L92.89 61.49 L90.63 63.20 L88.20 64.66 L85.70 65.90 L83.22 66.93 L80.83 67.80 L78.61 68.58 L76.60 69.33 L74.84 70.11 L73.33 71.01 L72.06 72.06 L71.01 73.33 L70.11 74.84 L69.33 76.60 L68.58 78.61 L67.80 80.83 L66.93 83.22 L65.90 85.70 L64.66 88.20 L63.20 90.63 L61.49 92.89 L59.54 94.89 L57.37 96.54 L55.02 97.78 L52.54 98.54 L50.00 98.80 L47.46 98.54 L44.98 97.78 L42.63 96.54 L40.46 94.89 L38.51 92.89 L36.80 90.63 L35.34 88.20 L34.10 85.70 L33.07 83.22 L32.20 80.83 L31.42 78.61 L30.67 76.60 L29.89 74.84 L28.99 73.33 L27.94 72.06 L26.67 71.01 L25.16 70.11 L23.40 69.33 L21.39 68.58 L19.17 67.80 L16.78 66.93 L14.30 65.90 L11.80 64.66 L9.37 63.20 L7.11 61.49 L5.11 59.54 L3.46 57.37 L2.22 55.02 L1.46 52.54 L1.20 50.00 L1.46 47.46 L2.22 44.98 L3.46 42.63 L5.11 40.46 L7.11 38.51 L9.37 36.80 L11.80 35.34 L14.30 34.10 L16.78 33.07 L19.17 32.20 L21.39 31.42 L23.40 30.67 L25.16 29.89 L26.67 28.99 L27.94 27.94 L28.99 26.67 L29.89 25.16 L30.67 23.40 L31.42 21.39 L32.20 19.17 L33.07 16.78 L34.10 14.30 L35.34 11.80 L36.80 9.37 L38.51 7.11 L40.46 5.11 L42.63 3.46 L44.98 2.22 L47.46 1.46 L50.00 1.20 L52.54 1.46 L55.02 2.22 L57.37 3.46 L59.54 5.11 L61.49 7.11 L63.20 9.37 L64.66 11.80 L65.90 14.30 L66.93 16.78 L67.80 19.17 L68.58 21.39 L69.33 23.40 L70.11 25.16 L71.01 26.67 L72.06 27.94 L73.33 28.99 L74.84 29.89 L76.60 30.67 L78.61 31.42 L80.83 32.20 L83.22 33.07 L85.70 34.10 L88.20 35.34 L90.63 36.80 L92.89 38.51 L94.89 40.46 L96.54 42.63 L97.78 44.98 L98.54 47.46Z"><animate attributeName="d" dur="13s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" values="M98.80 50.00 L98.54 52.54 L97.78 55.02 L96.54 57.37 L94.89 59.54 L92.89 61.49 L90.63 63.20 L88.20 64.66 L85.70 65.90 L83.22 66.93 L80.83 67.80 L78.61 68.58 L76.60 69.33 L74.84 70.11 L73.33 71.01 L72.06 72.06 L71.01 73.33 L70.11 74.84 L69.33 76.60 L68.58 78.61 L67.80 80.83 L66.93 83.22 L65.90 85.70 L64.66 88.20 L63.20 90.63 L61.49 92.89 L59.54 94.89 L57.37 96.54 L55.02 97.78 L52.54 98.54 L50.00 98.80 L47.46 98.54 L44.98 97.78 L42.63 96.54 L40.46 94.89 L38.51 92.89 L36.80 90.63 L35.34 88.20 L34.10 85.70 L33.07 83.22 L32.20 80.83 L31.42 78.61 L30.67 76.60 L29.89 74.84 L28.99 73.33 L27.94 72.06 L26.67 71.01 L25.16 70.11 L23.40 69.33 L21.39 68.58 L19.17 67.80 L16.78 66.93 L14.30 65.90 L11.80 64.66 L9.37 63.20 L7.11 61.49 L5.11 59.54 L3.46 57.37 L2.22 55.02 L1.46 52.54 L1.20 50.00 L1.46 47.46 L2.22 44.98 L3.46 42.63 L5.11 40.46 L7.11 38.51 L9.37 36.80 L11.80 35.34 L14.30 34.10 L16.78 33.07 L19.17 32.20 L21.39 31.42 L23.40 30.67 L25.16 29.89 L26.67 28.99 L27.94 27.94 L28.99 26.67 L29.89 25.16 L30.67 23.40 L31.42 21.39 L32.20 19.17 L33.07 16.78 L34.10 14.30 L35.34 11.80 L36.80 9.37 L38.51 7.11 L40.46 5.11 L42.63 3.46 L44.98 2.22 L47.46 1.46 L50.00 1.20 L52.54 1.46 L55.02 2.22 L57.37 3.46 L59.54 5.11 L61.49 7.11 L63.20 9.37 L64.66 11.80 L65.90 14.30 L66.93 16.78 L67.80 19.17 L68.58 21.39 L69.33 23.40 L70.11 25.16 L71.01 26.67 L72.06 27.94 L73.33 28.99 L74.84 29.89 L76.60 30.67 L78.61 31.42 L80.83 32.20 L83.22 33.07 L85.70 34.10 L88.20 35.34 L90.63 36.80 L92.89 38.51 L94.89 40.46 L96.54 42.63 L97.78 44.98 L98.54 47.46Z;M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z;M98.80 50.00 L98.54 52.54 L97.78 55.02 L96.54 57.37 L94.89 59.54 L92.89 61.49 L90.63 63.20 L88.20 64.66 L85.70 65.90 L83.22 66.93 L80.83 67.80 L78.61 68.58 L76.60 69.33 L74.84 70.11 L73.33 71.01 L72.06 72.06 L71.01 73.33 L70.11 74.84 L69.33 76.60 L68.58 78.61 L67.80 80.83 L66.93 83.22 L65.90 85.70 L64.66 88.20 L63.20 90.63 L61.49 92.89 L59.54 94.89 L57.37 96.54 L55.02 97.78 L52.54 98.54 L50.00 98.80 L47.46 98.54 L44.98 97.78 L42.63 96.54 L40.46 94.89 L38.51 92.89 L36.80 90.63 L35.34 88.20 L34.10 85.70 L33.07 83.22 L32.20 80.83 L31.42 78.61 L30.67 76.60 L29.89 74.84 L28.99 73.33 L27.94 72.06 L26.67 71.01 L25.16 70.11 L23.40 69.33 L21.39 68.58 L19.17 67.80 L16.78 66.93 L14.30 65.90 L11.80 64.66 L9.37 63.20 L7.11 61.49 L5.11 59.54 L3.46 57.37 L2.22 55.02 L1.46 52.54 L1.20 50.00 L1.46 47.46 L2.22 44.98 L3.46 42.63 L5.11 40.46 L7.11 38.51 L9.37 36.80 L11.80 35.34 L14.30 34.10 L16.78 33.07 L19.17 32.20 L21.39 31.42 L23.40 30.67 L25.16 29.89 L26.67 28.99 L27.94 27.94 L28.99 26.67 L29.89 25.16 L30.67 23.40 L31.42 21.39 L32.20 19.17 L33.07 16.78 L34.10 14.30 L35.34 11.80 L36.80 9.37 L38.51 7.11 L40.46 5.11 L42.63 3.46 L44.98 2.22 L47.46 1.46 L50.00 1.20 L52.54 1.46 L55.02 2.22 L57.37 3.46 L59.54 5.11 L61.49 7.11 L63.20 9.37 L64.66 11.80 L65.90 14.30 L66.93 16.78 L67.80 19.17 L68.58 21.39 L69.33 23.40 L70.11 25.16 L71.01 26.67 L72.06 27.94 L73.33 28.99 L74.84 29.89 L76.60 30.67 L78.61 31.42 L80.83 32.20 L83.22 33.07 L85.70 34.10 L88.20 35.34 L90.63 36.80 L92.89 38.51 L94.89 40.46 L96.54 42.63 L97.78 44.98 L98.54 47.46Z"/></path></svg>
+                        <img src="assets/screens/fastboot.webp" width="720" height="1514" alt="Fastboot dashboard showing a connected device, unlock status and Flash, Get variables, Wipe data and Reboot options tiles" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="more" id="more" aria-labelledby="more-title">
+            <h2 id="more-title" class="display" data-reveal>And plenty more.</h2>
+
+            <div class="bento">
+                <article class="tile tile--qs" data-reveal style="--i:0">
+                    <div class="tile__top">
+                        <h3 class="title">Quick Settings tiles</h3>
+                        <p>Up to ten tiles, each running a command through Shizuku or root. Try it: add a tile, then tap it.</p>
+                    </div>
+                    <div class="qs" id="qs">
+                        <div class="qs__grid" id="qs-grid" role="list"></div>
+                        <ol class="qs__logs" id="qs-logs" hidden aria-live="polite"></ol>
+                        <div class="qs__seg" role="tablist" aria-label="Tiles demo view">
+                            <span class="qs__thumb" aria-hidden="true"></span>
+                            <button role="tab" aria-selected="true" data-view="tiles">Tiles</button>
+                            <button role="tab" aria-selected="false" data-view="logs" tabindex="-1">Logs</button>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="tile tile--files" data-reveal style="--i:2">
+                    <h3 class="title"><span class="ms" aria-hidden="true">folder_open</span>File browser</h3>
+                    <p>Push and pull over Wi-Fi or OTG with real ADB sync transfers. Multi-select, copy, cut, rename, and decide what happens on conflicts.</p>
+                    
+                </article>
+
+                <article class="tile tile--backup" data-reveal style="--i:3">
+                    <h3 class="title"><span class="ms" aria-hidden="true">backup</span>Scheduled backups</h3>
+                    <p>Settings, commands, bookmarks and tiles, to an encrypted file or Google Drive. Daily, weekly or monthly.</p>
+                    
+                </article>
+
+
+                <article class="tile tile--lang" data-reveal style="--i:5">
+                    <h3 class="title"><span class="ms" aria-hidden="true">translate</span>16 languages</h3>
+                    <div class="marquee" aria-hidden="true">
+                        <div class="marquee__track">
+                            <span>English</span><span>Deutsch</span><span>Español</span><span>Français</span><span>Italiano</span><span>Português</span><span>Русский</span><span>Українська</span><span>Türkçe</span><span>Tiếng Việt</span><span>हिन्दी</span><span>日本語</span><span>中文</span><span>العربية</span><span>فارسی</span><span>Português (PT)</span>
+                            <span>English</span><span>Deutsch</span><span>Español</span><span>Français</span><span>Italiano</span><span>Português</span><span>Русский</span><span>Українська</span><span>Türkçe</span><span>Tiếng Việt</span><span>हिन्दी</span><span>日本語</span><span>中文</span><span>العربية</span><span>فارسی</span><span>Português (PT)</span>
+                        </div>
+                    </div>
+                    <p class="tile__foot">Translated by the community on Crowdin and switchable inside the app.</p>
+                </article>
+
+
+            </div>
+        </section>
+
+        <section class="yours" id="yours" aria-labelledby="yours-title">
+            <div class="yours__inner">
+                <div class="yours__text">
+                    <h2 id="yours-title" class="display" data-reveal>Make it yours.</h2>
+                    <p class="lede" data-reveal>Material You from your wallpaper, or one of 20 seed colours across nine palette styles. Pick a seed and this page re-themes itself the way the app does.</p>
+                </div>
+                <div class="seeds" id="seeds" role="radiogroup" aria-label="Seed colours from the app" data-reveal></div>
+                <p class="yours__facts" data-reveal>High contrast dark for OLED · 39 fonts, or import your own · Colour schemes you can export and share</p>
+            </div>
+        </section>
+
+        <section class="download" id="download" aria-labelledby="download-title">
+            <div class="download__head">
+                <h2 id="download-title" class="display" data-reveal>Get aShell You.</h2>
+                <p class="version" data-reveal><span>Latest stable</span><b data-stat="version">v7.4.0</b></p>
+            </div>
+
+            <div class="sources">
+                <article class="source source--main" data-reveal style="--i:0">
+                    <svg class="shape shape--source" viewBox="0 0 100 100" aria-hidden="true"><path d="M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z"><animate attributeName="d" dur="14s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" values="M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z;M97.46 50.00 L96.92 52.46 L95.40 54.77 L93.15 56.83 L90.52 58.61 L87.93 60.16 L85.74 61.61 L84.22 63.14 L83.49 64.91 L83.49 67.06 L84.01 69.63 L84.75 72.56 L85.34 75.68 L85.48 78.73 L84.92 81.44 L83.56 83.56 L81.44 84.92 L78.73 85.48 L75.68 85.34 L72.56 84.75 L69.64 84.01 L67.06 83.49 L64.91 83.49 L63.14 84.22 L61.61 85.74 L60.16 87.93 L58.61 90.52 L56.83 93.15 L54.77 95.40 L52.46 96.92 L50.00 97.46 L47.54 96.92 L45.23 95.40 L43.17 93.15 L41.39 90.52 L39.84 87.93 L38.39 85.74 L36.86 84.22 L35.09 83.49 L32.94 83.49 L30.37 84.01 L27.44 84.75 L24.32 85.34 L21.27 85.48 L18.56 84.92 L16.44 83.56 L15.08 81.44 L14.52 78.73 L14.66 75.68 L15.25 72.56 L15.99 69.63 L16.51 67.06 L16.51 64.91 L15.78 63.14 L14.26 61.61 L12.07 60.16 L9.48 58.61 L6.85 56.83 L4.60 54.77 L3.08 52.46 L2.54 50.00 L3.08 47.54 L4.60 45.23 L6.85 43.17 L9.48 41.39 L12.07 39.84 L14.26 38.39 L15.78 36.86 L16.51 35.09 L16.51 32.94 L15.99 30.37 L15.25 27.44 L14.66 24.32 L14.52 21.27 L15.08 18.56 L16.44 16.44 L18.56 15.08 L21.27 14.52 L24.32 14.66 L27.44 15.25 L30.36 15.99 L32.94 16.51 L35.09 16.51 L36.86 15.78 L38.39 14.26 L39.84 12.07 L41.39 9.48 L43.17 6.85 L45.23 4.60 L47.54 3.08 L50.00 2.54 L52.46 3.08 L54.77 4.60 L56.83 6.85 L58.61 9.48 L60.16 12.07 L61.61 14.26 L63.14 15.78 L64.91 16.51 L67.06 16.51 L69.64 15.99 L72.56 15.25 L75.68 14.66 L78.73 14.52 L81.44 15.08 L83.56 16.44 L84.92 18.56 L85.48 21.27 L85.34 24.32 L84.75 27.44 L84.01 30.37 L83.49 32.94 L83.49 35.09 L84.22 36.86 L85.74 38.39 L87.93 39.84 L90.52 41.39 L93.15 43.17 L95.40 45.23 L96.92 47.54Z;M97.08 50.00 L96.43 52.43 L94.71 54.70 L92.52 56.73 L90.60 58.63 L89.53 60.59 L89.48 62.83 L90.19 65.43 L91.07 68.28 L91.42 71.11 L90.77 73.54 L88.99 75.32 L86.37 76.42 L83.45 77.09 L80.85 77.77 L78.93 78.93 L77.77 80.85 L77.09 83.45 L76.42 86.37 L75.32 88.99 L73.54 90.77 L71.11 91.42 L68.28 91.07 L65.43 90.19 L62.83 89.48 L60.59 89.53 L58.63 90.60 L56.73 92.52 L54.70 94.71 L52.43 96.43 L50.00 97.08 L47.57 96.43 L45.30 94.71 L43.27 92.52 L41.37 90.60 L39.41 89.53 L37.17 89.48 L34.57 90.19 L31.72 91.07 L28.89 91.42 L26.46 90.77 L24.68 88.99 L23.58 86.37 L22.91 83.45 L22.23 80.85 L21.07 78.93 L19.15 77.77 L16.55 77.09 L13.63 76.42 L11.01 75.32 L9.23 73.54 L8.58 71.11 L8.93 68.28 L9.81 65.43 L10.52 62.83 L10.47 60.59 L9.40 58.63 L7.48 56.73 L5.29 54.70 L3.57 52.43 L2.92 50.00 L3.57 47.57 L5.29 45.30 L7.48 43.27 L9.40 41.37 L10.47 39.41 L10.52 37.17 L9.81 34.57 L8.93 31.72 L8.58 28.89 L9.23 26.46 L11.01 24.68 L13.63 23.58 L16.55 22.91 L19.15 22.23 L21.07 21.07 L22.23 19.15 L22.91 16.55 L23.58 13.63 L24.68 11.01 L26.46 9.23 L28.89 8.58 L31.72 8.93 L34.57 9.81 L37.17 10.52 L39.41 10.47 L41.37 9.40 L43.27 7.48 L45.30 5.29 L47.57 3.57 L50.00 2.92 L52.43 3.57 L54.70 5.29 L56.73 7.48 L58.63 9.40 L60.59 10.47 L62.83 10.52 L65.43 9.81 L68.28 8.93 L71.11 8.58 L73.54 9.23 L75.32 11.01 L76.42 13.63 L77.09 16.55 L77.77 19.15 L78.93 21.07 L80.85 22.23 L83.45 22.91 L86.37 23.58 L88.99 24.68 L90.77 26.46 L91.42 28.89 L91.07 31.72 L90.19 34.57 L89.48 37.17 L89.53 39.41 L90.60 41.37 L92.52 43.27 L94.71 45.30 L96.43 47.57Z"/></path></svg>
+                    <h3 class="headline">GitHub Releases</h3>
+                    <p>The full build, including the ADB Agent and Google Drive backup. v8 pre-releases with mirror, logcat, fastboot and sideload land here first.</p>
+                    <div class="source__actions">
+                        <a class="btn btn--primary btn--xl" href="https://github.com/DP-Hridayan/aShellYou/releases/latest" target="_blank" rel="noopener"><span class="ms" aria-hidden="true">download</span>Download APK</a>
+                        <a class="btn btn--outline btn--xl" href="https://github.com/DP-Hridayan/aShellYou/releases" target="_blank" rel="noopener">All releases</a>
+                    </div>
+                </article>
+                <a class="source" href="https://f-droid.org/packages/in.hridayan.ashell" target="_blank" rel="noopener" data-reveal style="--i:1">
+                    <h3 class="title">F-Droid</h3>
+                    <p>Built and signed by F-Droid from source. Ships without the AI module and Google Drive backup.</p>
+                    <span class="source__go">Open F-Droid<span class="ms" aria-hidden="true">arrow_outward</span></span>
+                </a>
+                <a class="source" href="https://apt.izzysoft.de/fdroid/index/apk/in.hridayan.ashell" target="_blank" rel="noopener" data-reveal style="--i:2">
+                    <h3 class="title">IzzyOnDroid</h3>
+                    <p>Updates through any F-Droid client with the IzzyOnDroid repository added.</p>
+                    <span class="source__go">Open IzzyOnDroid<span class="ms" aria-hidden="true">arrow_outward</span></span>
+                </a>
+            </div>
+
+            <div class="notes">
+                <article class="note" data-reveal style="--i:0">
+                    <span class="note__icon ms" aria-hidden="true">checklist</span>
+                    <div>
+                        <h3 class="title">What you need</h3>
+                        <p>Android 9 or newer. For commands on your own phone, use Shizuku, root or wireless debugging. For another device, your phone needs nothing extra: just enable USB or wireless debugging on the target.</p>
+                        <a class="text-link" href="https://github.com/DP-Hridayan/aShellYou/wiki" target="_blank" rel="noopener">Setup guides on the wiki<span class="ms" aria-hidden="true">arrow_forward</span></a>
+                    </div>
+                </article>
+                <article class="note note--warn" data-reveal style="--i:1">
+                    <span class="note__icon ms" aria-hidden="true">warning</span>
+                    <div>
+                        <h3 class="title">Know the command first</h3>
+                        <p>aShell You runs real commands with real permissions. A wiped partition stays wiped. Basic knowledge of ADB and Linux commands is expected.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="community" aria-labelledby="community-title">
+            <h2 id="community-title" class="headline" data-reveal>Built in the open.</h2>
+            <ul class="community__links" data-reveal>
+                <li><a href="https://github.com/DP-Hridayan/aShellYou/issues" target="_blank" rel="noopener"><span class="ms" aria-hidden="true">bug_report</span>Report an issue</a></li>
+                <li><a href="https://crowdin.com/project/ashellyou" target="_blank" rel="noopener"><span class="ms" aria-hidden="true">translate</span>Translate on Crowdin</a></li>
+                <li><a href="https://t.me/aShellYou" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#tg"/></svg>Telegram</a></li>
+                <li><a href="https://www.buymeacoffee.com/hridayan" target="_blank" rel="noopener"><span class="ms" aria-hidden="true">coffee</span>Buy Me a Coffee</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="foot">
+        <a class="foot__mark" href="#top" aria-label="Back to top">
+            <svg class="foot__head" aria-hidden="true"><use href="#head"/></svg>
+            <span>Shell You</span>
+        </a>
+        <div class="foot__row">
+            <nav class="foot__links" aria-label="Footer">
+                <a href="https://github.com/DP-Hridayan/aShellYou" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/DP-Hridayan/aShellYou/wiki" target="_blank" rel="noopener">Wiki</a>
+                <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/PRIVACY_POLICY.md" target="_blank" rel="noopener">Privacy</a>
+                <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/TERMS_OF_SERVICE.md" target="_blank" rel="noopener">Terms</a>
+                <a href="https://github.com/DP-Hridayan/aShellYou/blob/master/LICENSE.md" target="_blank" rel="noopener">GPL-3.0</a>
+            </nav>
+            <p class="foot__credit">Designed and developed by <a href="https://github.com/DP-Hridayan" target="_blank" rel="noopener">DP Hridayan</a></p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-</body>
 
+    <script src="script.js" defer></script>
+</body>
 </html>

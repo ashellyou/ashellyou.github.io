@@ -1,0 +1,104 @@
+@property --hue {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 124;
+}
+
+:root {
+  color-scheme: light;
+
+  --hue: 124;
+  --hue-t: calc(var(--hue) + 60);
+
+  --surface:                   oklch(98.2% 0.016 var(--hue));
+  --surface-bright:            oklch(99.5% 0.006 var(--hue));
+  --surface-container-low:     oklch(96.6% 0.018 var(--hue));
+  --surface-container:         oklch(94.7% 0.020 var(--hue));
+  --surface-container-high:    oklch(91.6% 0.021 var(--hue));
+  --surface-container-highest: oklch(88.6% 0.022 var(--hue));
+  --on-surface:                oklch(22.2% 0.012 var(--hue));
+  --on-surface-variant:        oklch(39.5% 0.020 var(--hue));
+  --outline:                   oklch(56.6% 0.021 var(--hue));
+  --outline-variant:           oklch(82.6% 0.021 var(--hue));
+
+  --primary:                   oklch(47.6% 0.091 var(--hue));
+  --primary-strong:            oklch(40% 0.085 var(--hue));
+  --on-primary:                oklch(99% 0.008 var(--hue));
+  --primary-container:         oklch(90.9% 0.102 var(--hue));
+  --primary-container-high:    oklch(86.5% 0.115 var(--hue));
+  --on-primary-container:      oklch(22.6% 0.060 var(--hue));
+
+  --secondary-container:       oklch(91% 0.050 calc(var(--hue) + 16));
+  --on-secondary-container:    oklch(26% 0.050 calc(var(--hue) + 16));
+
+  --tertiary:                  oklch(47.7% 0.049 var(--hue-t));
+  --on-tertiary:               oklch(99% 0.008 var(--hue-t));
+  --tertiary-container:        oklch(90.7% 0.050 var(--hue-t));
+  --on-tertiary-container:     oklch(24% 0.040 var(--hue-t));
+
+  --error:                     oklch(50% 0.182 27);
+  --error-container:           oklch(92% 0.041 25);
+  --on-error-container:        oklch(32% 0.110 25);
+
+  --log-info:                  oklch(77.5% 0.128 231);
+  --log-info-row:              oklch(96% 0.020 200);
+  --log-debug:                 oklch(76.8% 0.122 144);
+  --log-debug-row:             oklch(95.5% 0.022 135);
+  --log-error:                 oklch(68.7% 0.142 23);
+  --log-error-row:             oklch(95% 0.025 40);
+
+  --font-sans: "Google Sans Flex", "Google Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Google Sans Code", ui-monospace, "SFMono-Regular", monospace;
+
+  --text-label:    0.875rem;
+  --text-body:     1.0625rem;
+  --text-body-lg:  1.25rem;
+  --text-title:    1.375rem;
+  --text-headline: clamp(1.75rem, 1.5vw + 1.25rem, 2.25rem);
+  --text-display-s: clamp(2.5rem, 3.6vw + 1.2rem, 4rem);
+  --text-display:  clamp(3.25rem, 7vw + 1rem, 7.5rem);
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --page-max:    80rem;
+
+  --shape-xs:   8px;
+  --shape-sm:   12px;
+  --shape-md:   16px;
+  --shape-lg:   20px;
+  --shape-xl:   28px;
+  --shape-2xl:  36px;
+  --shape-3xl:  48px;
+  --shape-full: 999px;
+
+  --spring-fast:    cubic-bezier(0.42, 1.67, 0.21, 0.9);
+  --spring:         cubic-bezier(0.38, 1.21, 0.22, 1);
+  --spring-slow:    cubic-bezier(0.39, 1.29, 0.35, 0.98);
+  --ease-emph:      cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-standard:  cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit:      cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  --dur-1: 150ms;
+  --dur-2: 250ms;
+  --dur-3: 400ms;
+  --dur-4: 600ms;
+  --dur-5: 900ms;
+
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-bar: 30;
+  --z-fab: 35;
+
+  --elev-1: 0 1px 2px oklch(22% 0.02 var(--hue) / 0.12), 0 1px 3px 1px oklch(22% 0.02 var(--hue) / 0.06);
+  --elev-2: 0 2px 6px 2px oklch(22% 0.02 var(--hue) / 0.08), 0 1px 2px oklch(22% 0.02 var(--hue) / 0.12);
+  --elev-3: 0 12px 32px -8px oklch(22% 0.03 var(--hue) / 0.22), 0 4px 8px -2px oklch(22% 0.03 var(--hue) / 0.08);
+}
