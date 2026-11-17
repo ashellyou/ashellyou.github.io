@@ -24,7 +24,12 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 document.documentElement.classList.add('js');
 
+const brandSvgPromise = fetch('assets/brand.svg')
+    .then(r => r.ok ? r.text() : null)
+    .catch(e => { console.error('Failed to load brand SVG', e); return null; });
+
 document.addEventListener('DOMContentLoaded', () => {
+    initBrandLogos();
     initAppbar();
     initReveal();
     initParallax();
@@ -33,6 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
     initSeeds();
     loadStats();
 });
+
+async function initBrandLogos() {
+    const text = await brandSvgPromise;
+    if (!text) return;
+    const doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+    const svg = doc.querySelector('svg');
+    if (!svg) return;
+
+    document.querySelectorAll('[data-brand-logo]').forEach(el => {
+        const clone = svg.cloneNode(true);
+        const variant = el.dataset.brandLogo;
+        clone.classList.add(variant === 'footer' ? 'foot__logo' : 'brand__logo');
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('focusable', 'false');
+        el.replaceChildren(clone);
+    });
+}
 
 function squish(el) {
     if (!el || reduceMotion.matches) return;

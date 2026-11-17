@@ -19,7 +19,7 @@ html {
 html.is-retheming *,
 html.is-retheming *::before,
 html.is-retheming *::after {
-  transition: background-color 700ms var(--ease-standard), color 700ms var(--ease-standard), border-color 700ms var(--ease-standard), fill 700ms var(--ease-standard), box-shadow 700ms var(--ease-standard), outline-color 700ms var(--ease-standard) !important;
+  transition: background-color 700ms var(--ease-standard), color 700ms var(--ease-standard), border-color 700ms var(--ease-standard), fill 700ms var(--ease-standard), stroke 700ms var(--ease-standard), box-shadow 700ms var(--ease-standard), outline-color 700ms var(--ease-standard) !important;
 }
 
 html.is-retheming body {
@@ -343,32 +343,50 @@ code {
 
 .brand {
   display: inline-flex;
-  align-items: flex-end;
-  gap: 0.06em;
-  font-size: 1.85rem;
+  align-items: center;
   margin-right: auto;
   line-height: 1;
-  white-space: nowrap;
 }
 
-.brand__head {
-  width: 0.78em;
-  height: 1.05em;
-  color: var(--tertiary);
-  transform-origin: 50% 80%;
+.brand__logo {
+  height: 2.1rem;
+  width: auto;
+  overflow: visible;
+  display: block;
+}
+
+.brand__head-group,
+.foot__head-group {
+  transform-box: fill-box;
+  transform-origin: 50% 75%;
   transition: transform var(--dur-4) var(--spring-fast);
 }
 
-.brand:hover .brand__head {
+.brand:hover .brand__head-group {
   transform: rotate(-12deg) scale(1.08);
 }
 
-.brand__word {
-  font-weight: 650;
-  letter-spacing: -0.035em;
-  color: var(--primary);
-  font-variation-settings: "ROND" 70, "wdth" 92;
-  padding-bottom: 0.02em;
+.brand__body {
+  fill: var(--tertiary);
+  stroke: var(--tertiary);
+  stroke-width: 2.58;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  transition: fill var(--dur-4) var(--ease-standard), stroke var(--dur-4) var(--ease-standard);
+}
+
+.brand__eye {
+  fill: var(--tertiary);
+  stroke: var(--tertiary);
+  stroke-width: 0.29;
+  stroke-linecap: round;
+  transition: fill var(--dur-4) var(--ease-standard), stroke var(--dur-4) var(--ease-standard);
+}
+
+.brand__text,
+.brand__text-stroke {
+  fill: var(--primary);
+  transition: fill var(--dur-4) var(--ease-standard);
 }
 
 .appbar__nav {
@@ -1882,26 +1900,20 @@ a.source:hover .source__go .ms {
 .foot__mark {
   display: inline-flex;
   align-items: flex-end;
-  gap: 0.05em;
   justify-self: start;
-  font-size: clamp(3.5rem, 15vw, 13rem);
-  font-weight: 700;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  color: var(--primary);
-  font-variation-settings: "ROND" 70, "wdth" 92;
-  white-space: nowrap;
+  max-width: 100%;
 }
 
-.foot__head {
-  width: 0.78em;
-  height: 1.05em;
-  color: var(--tertiary);
-  transition: transform var(--dur-5) var(--spring-fast);
-  transform-origin: 50% 80%;
+.foot__logo {
+  height: clamp(3rem, 12vw, 9rem);
+  width: auto;
+  max-width: 100%;
+  overflow: visible;
+  display: block;
 }
 
-.foot__mark:hover .foot__head {
+.foot__mark:hover .brand__head-group,
+.foot__mark:hover .foot__head-group {
   transform: rotate(-10deg);
 }
 

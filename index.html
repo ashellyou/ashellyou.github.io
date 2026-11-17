@@ -36,6 +36,7 @@
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
     <link rel="preload" as="image" href="assets/screens/home.webp" fetchpriority="high">
+    <link rel="preload" href="assets/brand.svg" as="fetch" crossorigin>
 
     <script type="application/ld+json">
 {
@@ -155,9 +156,8 @@
     <a class="skip" href="#main">Skip to content</a>
 
     <header class="appbar" id="appbar">
-        <a class="brand" href="#top" aria-label="aShell You home">
-            <svg class="brand__head" aria-hidden="true"><use href="#head"/></svg>
-            <span class="brand__word">Shell You</span>
+        <a class="brand" href="#top" aria-label="aShell You home" data-brand-logo="header">
+            <span class="sr-only">aShell You</span>
         </a>
         <nav class="appbar__nav" aria-label="Primary">
             <a href="#home">Features</a>
@@ -499,9 +499,8 @@
     </main>
 
     <footer class="foot">
-        <a class="foot__mark" href="#top" aria-label="Back to top">
-            <svg class="foot__head" aria-hidden="true"><use href="#head"/></svg>
-            <span>Shell You</span>
+        <a class="foot__mark" href="#top" aria-label="Back to top: aShell You" data-brand-logo="footer">
+            <span class="sr-only">aShell You</span>
         </a>
         <div class="foot__row">
             <nav class="foot__links" aria-label="Footer">
