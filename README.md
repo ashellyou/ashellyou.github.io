@@ -6,7 +6,7 @@
 
 This repository hosts the source code for the official **aShell You** website. The site is designed to showcase the app's modern Material You interface, powerful features, and seamless user experience.
 
-**Live Demo:** [https://ashellyou.github.io](https://ashellyou.github.io)
+**Live Demo:** [https://ashellyou.com](https://ashellyou.com)
 
 ## Tech Stack 🛠️
 
